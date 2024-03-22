@@ -1,1 +1,0 @@
-const String tline1 = "EBGaramond-Italic-VariableFont_wght.ttf";

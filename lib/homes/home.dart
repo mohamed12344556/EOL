@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:high_school/login.dart';
+import 'package:high_school/login/sign/login.dart';
 import 'package:lottie/lottie.dart';
 
 class home extends StatefulWidget {
@@ -12,7 +12,7 @@ class _homeState extends State<home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber[600],
+      backgroundColor: Color.fromARGB(255, 20, 94, 1),
       drawer: Drawer(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -56,7 +56,7 @@ ListTile(
 
       ),
       appBar: AppBar(
-        backgroundColor: Colors.amber[600],
+        backgroundColor: Color.fromARGB(255, 20, 94, 1),
         elevation: 0,
         centerTitle: true,
         title: const Text('EOL' ,
@@ -94,7 +94,7 @@ ListTile(
                         child: Container(
                             height: 140,
                             decoration: BoxDecoration(
-                              color: Colors.amber[600],
+                              color: Color.fromARGB(255, 20, 94, 1),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             width: 120,
@@ -109,7 +109,7 @@ ListTile(
                         child: Container(
                             height: 140,
                             decoration: BoxDecoration(
-                              color: Colors.amber[600],
+                              color: Color.fromARGB(255, 20, 94, 1),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             width: 120,
@@ -130,7 +130,7 @@ ListTile(
                             height: 140,
                             width: 120,
                             decoration: BoxDecoration(
-                              color: Colors.amber[600],
+                              color: Color.fromARGB(255, 20, 94, 1),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child:  const Center(child: Text('Plan',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),))),
@@ -144,7 +144,7 @@ ListTile(
                         child: Container(
                             height: 140,
                             decoration: BoxDecoration(
-                              color: Colors.amber[600],
+                              color: Color.fromARGB(255, 20, 94, 1),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             width: 120,

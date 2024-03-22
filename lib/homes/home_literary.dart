@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:high_school/account.dart';
-import 'package:high_school/login.dart';
+import 'package:high_school/account-1/account.dart';
+import 'package:high_school/login/sign/login.dart';
 import 'package:lottie/lottie.dart';
 
 class homeliterary extends StatefulWidget {
@@ -13,7 +13,7 @@ class _homeliteraryState extends State<homeliterary> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber[600],
+      backgroundColor: Color.fromARGB(255, 17, 82, 1),
       drawer: Drawer(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -32,9 +32,9 @@ ListTile(
 ),)
             ],),
            
-             ListTile(title: const Text("Account"),
+             ListTile(title: const Text("Profile"),
             leading: const Icon(Icons.account_balance_rounded),
-            onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: ((context) => account())));},
+            onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: ((context) =>account() )));},
             ),
             ListTile(title: const Text("order"),
             leading: const Icon(Icons.check_box),
@@ -57,7 +57,7 @@ ListTile(
 
       ),
       appBar: AppBar(
-        backgroundColor: Colors.amber[600],
+        backgroundColor: Color.fromARGB(255,23,34,131),
         elevation: 0,
         centerTitle: true,
         title: const Text('EOL' ,
@@ -97,7 +97,7 @@ ListTile(
                         child: Container(
                             height: 140,
                             decoration: BoxDecoration(
-                              color: Colors.amber[600],
+                              color: Color.fromARGB(255,23,34,131),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             width: 120,
@@ -112,7 +112,7 @@ ListTile(
                         child: Container(
                             height: 140,
                             decoration: BoxDecoration(
-                              color: Colors.amber[600],
+                              color: Color.fromARGB(255,23,34,131),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             width: 120,
@@ -132,7 +132,7 @@ ListTile(
                         child: Container(
                             height: 140,
                             decoration: BoxDecoration(
-                              color: Colors.amber[600],
+                              color: Color.fromARGB(255,23,34,131),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             width: 120,
@@ -147,7 +147,7 @@ ListTile(
                         child: Container(
                             height: 140,
                             decoration: BoxDecoration(
-                              color: Colors.amber[600],
+                              color: Color.fromARGB(255,23,34,131),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             width: 120,

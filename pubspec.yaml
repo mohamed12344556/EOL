@@ -19,8 +19,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.5 <4.0.0'
-
+  sdk: '>=3.3.2 <4.0.0'
+  
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -33,7 +33,7 @@ dependencies:
   lottie: ^2.7.0
   flutter:
     sdk: flutter
-  #google_fonts: ^6.2.1
+  # google_fonts: ^6.2.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -41,6 +41,7 @@ dependencies:
   line_awesome_flutter: ^2.0.0
   intl_phone_number_input: ^0.7.3+1
   intl_phone_field: ^3.2.0
+  # flutter_dialogflow_v2: ^0.3.2
   
 dev_dependencies:
   flutter_test:

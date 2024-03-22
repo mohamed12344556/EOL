@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:high_school/home.dart';
-import 'package:high_school/sign_in.dart';
+import 'package:high_school/homes/home.dart';
+import 'package:high_school/login/sign/sign_in.dart';
 class login extends StatefulWidget {
   const login({Key? key}): super(key: key);
   @override
@@ -28,12 +28,12 @@ TextEditingController password = TextEditingController();
               Text('EOL' ,
               style: TextStyle(
               color: Colors.black,
-              fontSize: 25,
+              fontSize: 40,
               fontWeight: FontWeight.bold,
               fontFamily:'EBGaramond-Italic-VariableFont_wght.ttf')),
               Text("welcomeback to EOL",style: 
               TextStyle(
-              color: Color.fromARGB(255, 23, 34, 131),
+              color: Color.fromARGB(255, 20, 94, 1),
               fontSize:30,
               fontWeight: FontWeight.bold,
               fontFamily:'EBGaramond-Italic-VariableFont_wght.ttf')),
@@ -46,7 +46,7 @@ TextEditingController password = TextEditingController();
                     decoration: InputDecoration(
                        border: OutlineInputBorder(),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color.fromARGB(255, 23, 34, 131),width: 1.5),
+                        borderSide: BorderSide(color: Color.fromARGB(255, 20, 94, 1),width: 1.5),
                         borderRadius: BorderRadius.circular(50)
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -67,7 +67,7 @@ TextEditingController password = TextEditingController();
                       prefixIcon: Icon(Icons.key,color: Colors.black,),
                        border: OutlineInputBorder(),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.amber,width: 1.5),
+                        borderSide: BorderSide(color: Color.fromARGB(255, 20, 94, 1),width: 1.5),
                         borderRadius: BorderRadius.circular(50)
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -87,7 +87,7 @@ TextEditingController password = TextEditingController();
                ),
                child: ElevatedButton(
                       style: ButtonStyle(
-  backgroundColor:MaterialStateProperty.all(Colors.amber),
+  backgroundColor:MaterialStateProperty.all(Color.fromARGB(255, 20, 94, 1)),
   shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
 
 ),
@@ -96,7 +96,7 @@ TextEditingController password = TextEditingController();
 
                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>home()));
                     },
-                    child: Text("login",style: TextStyle(color: Colors.black),),
+                    child: Text("login",style: TextStyle(color: Color.fromARGB(255, 253, 251, 251)),),
                     ),
              ) ,
              SizedBox(height:10),
@@ -110,7 +110,7 @@ TextEditingController password = TextEditingController();
                 },
                     child: Text("Register",
                 style: TextStyle(
-                  color: Colors.blue[900],
+                  color: Color.fromARGB(255, 20, 94, 1),
                   fontSize: 15,
                 ),
                 )

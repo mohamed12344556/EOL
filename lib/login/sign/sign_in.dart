@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:high_school/choose_department.dart';
-import 'package:high_school/login.dart';
+import 'package:high_school/departement/choose_department.dart';
+import 'package:high_school/login/sign/login.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -34,19 +34,20 @@ class _sign_inState extends State<sign_in> {
                       fontSize: 70,
                       fontFamily:'Smooch-Regular'),),
               ),
-              Center(child: Text('Create an account',style: TextStyle(color: Colors.amber[700],fontSize: 30,fontFamily:'Ephesis-Regular'),)),
+              Center(child: Text('Create an account',style: TextStyle(color: Color.fromARGB(255, 20, 94, 1),fontSize: 30,fontFamily:'Ephesis-Regular'),)),
               SizedBox(height: 20,),
               Row(
                 children: [
                   Expanded(
-                    child: TextField(
+                    child:
+                     TextField(
                       controller: firstName,
                       keyboardType: TextInputType.name,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.all(0),
                           border: OutlineInputBorder(),
                           focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.amber,width: 1.5),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 20, 94, 1),width: 1.5),
                               borderRadius: BorderRadius.circular(50)
                           ),
                           enabledBorder: OutlineInputBorder(
@@ -66,7 +67,7 @@ class _sign_inState extends State<sign_in> {
                           contentPadding: EdgeInsets.all(0),
                           border: OutlineInputBorder(),
                           focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.amber,width: 1.5),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 20, 94, 1),width: 1.5),
                               borderRadius: BorderRadius.circular(50)
                           ),
                           enabledBorder: OutlineInputBorder(
@@ -87,7 +88,7 @@ class _sign_inState extends State<sign_in> {
                     contentPadding: EdgeInsets.all(0),
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.amber,width: 1.5),
+                        borderSide: BorderSide(color: Color.fromARGB(255, 20, 94, 1),width: 1.5),
                         borderRadius: BorderRadius.circular(50)
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -105,7 +106,7 @@ class _sign_inState extends State<sign_in> {
                     contentPadding: EdgeInsets.all(0),
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.amber,width: 1.5),
+                        borderSide: BorderSide(color: Color.fromARGB(255, 20, 94, 1),width: 1.5),
                         borderRadius: BorderRadius.circular(50)
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -168,7 +169,7 @@ class _sign_inState extends State<sign_in> {
                     contentPadding: EdgeInsets.all(0),
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.amber,width: 1.5),
+                        borderSide: BorderSide(color: Color.fromARGB(255, 20, 94, 1),width: 1.5),
                         borderRadius: BorderRadius.circular(50)
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -188,7 +189,7 @@ class _sign_inState extends State<sign_in> {
                   ),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor:MaterialStateProperty.all(Colors.amber),
+                      backgroundColor:MaterialStateProperty.all(Color.fromARGB(255, 20, 94, 1)),
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
 
                     ),

@@ -7,7 +7,7 @@ class subscientific extends StatefulWidget {
   State<subscientific> createState() => _subscientificState();
 }
 
-class _subscientificState extends State<subscientific> {
+class  _subscientificState extends State<subscientific> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

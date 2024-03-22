@@ -23,9 +23,9 @@ class _choose_departmentState extends State<choose_department> {
       
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Colors.amber[600],
+          backgroundColor: Color.fromARGB(255, 20, 94, 1),
           appBar: AppBar(
-        backgroundColor: Colors.amber[600],
+        backgroundColor: Color.fromARGB(255, 20, 94, 1),
         elevation: 0,
         centerTitle: true,
         title: const Text('EOL' ,
@@ -62,7 +62,7 @@ class _choose_departmentState extends State<choose_department> {
             
                       style: ButtonStyle(
             
-                        backgroundColor:MaterialStateProperty.all(Colors.amber),
+                        backgroundColor:MaterialStateProperty.all(Color.fromARGB(255, 20, 94, 1)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
             
                       ),
@@ -86,7 +86,7 @@ class _choose_departmentState extends State<choose_department> {
                     ),
                     child: ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor:MaterialStateProperty.all(Colors.amber),
+                        backgroundColor:MaterialStateProperty.all(Color.fromARGB(255, 20, 94, 1)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
             
                       ),
@@ -110,7 +110,7 @@ class _choose_departmentState extends State<choose_department> {
                     ),
                     child: ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor:MaterialStateProperty.all(Colors.amber),
+                        backgroundColor:MaterialStateProperty.all(Color.fromARGB(255, 20, 94, 1)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
             
                       ),

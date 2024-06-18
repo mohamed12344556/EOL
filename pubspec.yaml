@@ -31,8 +31,12 @@ dependencies:
   intl: ^0.18.1
   flutter_date_pickers: ^0.4.2
   lottie: ^2.7.0
+  file_picker: ^8.0.0+1
+  
   flutter:
     sdk: flutter
+    
+  #dialog_flowtter: ^0.3.3  
   # google_fonts: ^6.2.1
 
   # The following adds the Cupertino Icons font to your application.
@@ -41,7 +45,18 @@ dependencies:
   line_awesome_flutter: ^2.0.0
   intl_phone_number_input: ^0.7.3+1
   intl_phone_field: ^3.2.0
-  # flutter_dialogflow_v2: ^0.3.2
+  ikchatbot: ^1.0.5
+  flutter_gemini: ^2.0.3
+  dash_chat_2: ^0.0.20
+  open_file: ^3.3.2
+  path_provider: ^2.1.3
+  pdf: ^3.10.8
+  chips_choice: ^3.0.1
+  http: ^1.2.1
+  awesome_dialog: ^3.2.1
+  shared_preferences: ^2.2.3
+  
+
   
 dev_dependencies:
   flutter_test:

@@ -6,6 +6,7 @@ import 'package:high_school/homes/home_literary.dart';
 import 'package:high_school/homes/home_mathematics.dart';
 import 'package:high_school/homes/home_scientific.dart';
 
+import 'package:high_school/model.dart';
 
 
 
@@ -17,15 +18,14 @@ class choose_department extends StatefulWidget {
 }
 
 class _choose_departmentState extends State<choose_department> {
+late final String val;
+
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          backgroundColor: Color.fromARGB(255, 20, 94, 1),
+    return   Scaffold(
+          backgroundColor: Color(0xFF102C57),
           appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 20, 94, 1),
+        backgroundColor: Color(0xFF102C57),
         elevation: 0,
         centerTitle: true,
         title: const Text('EOL' ,
@@ -37,7 +37,7 @@ class _choose_departmentState extends State<choose_department> {
               fontFamily:'Smooch-Regular'),),
        
       ),
-          body:SafeArea(
+          body: SafeArea(
             child: Padding(padding: const EdgeInsets.only(left: 25.0,right: 25,top: 60,bottom: 90),
             child: Container(
             height: double.infinity,
@@ -62,11 +62,14 @@ class _choose_departmentState extends State<choose_department> {
             
                       style: ButtonStyle(
             
-                        backgroundColor:MaterialStateProperty.all(Color.fromARGB(255, 20, 94, 1)),
+                        backgroundColor:MaterialStateProperty.all(Color(0xFF102C57)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
             
                       ),
                       onPressed: (){
+                        setState(() {
+                          //val.value="علوم";
+                        });
             
             
                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>homescientific()));
@@ -86,13 +89,15 @@ class _choose_departmentState extends State<choose_department> {
                     ),
                     child: ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor:MaterialStateProperty.all(Color.fromARGB(255, 20, 94, 1)),
+                        backgroundColor:MaterialStateProperty.all(Color(0xFF102C57)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
             
                       ),
                       onPressed: (){
             
-            
+             setState(() {
+                         // value="رياضة";
+                        });
                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>homemathematics()));
                       },
                       child: Text('mathematics ',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
@@ -116,7 +121,9 @@ class _choose_departmentState extends State<choose_department> {
                       ),
                       onPressed: (){
             
-            
+             setState(() {
+                         // value="ادبى";
+                        });
                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>homeliterary()));
                       },
                       child: Text(' literary ',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
@@ -128,7 +135,7 @@ class _choose_departmentState extends State<choose_department> {
             ),
             
             ), ),
-          )));
+          ));
   }
 
 } 

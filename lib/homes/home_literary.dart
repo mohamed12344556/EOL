@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:high_school/account-1/account.dart';
+import 'package:high_school/componet/crud.dart';
+import 'package:high_school/constant/link.dart';
+import 'package:high_school/contact_view.dart';
 import 'package:high_school/login/sign/login.dart';
+import 'package:high_school/main.dart';
+import 'package:high_school/plan/cardnote.dart';
+import 'package:high_school/plan/note/editenote.dart';
+import 'package:high_school/plan/plan_note_showbottom.dart';
 import 'package:lottie/lottie.dart';
 
 class homeliterary extends StatefulWidget {
@@ -10,6 +18,18 @@ class homeliterary extends StatefulWidget {
   State<homeliterary> createState() => _homeliteraryState();
 }
 class _homeliteraryState extends State<homeliterary> {
+  GlobalKey<ScaffoldState> scaffoldkey = GlobalKey();
+
+Crud crudnoteliterary=Crud();
+
+getnote()async{
+
+  var response = await crudnoteliterary.postRequest(linkViewNote, {
+    "id":sharepref.getString("id"),
+  });
+  return response ;
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,12 +62,13 @@ ListTile(
             ),
             ListTile(title: const Text("contact us"),
             leading: const Icon(Icons.phone_android_outlined),
-            onTap: (){},
+            onTap: (){ Navigator.of(context).push(MaterialPageRoute(builder: ((context) => ContactView())));},
             ),
             ListTile(title: const Text("logout"),
             leading: const Icon(Icons.exit_to_app),
             onTap: (){
-               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const login()));
+              sharepref.clear();
+              Navigator.of(context).pushNamedAndRemoveUntil("login", (route) => false);
             },
             ),
             ],
@@ -128,7 +149,55 @@ ListTile(
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0,left: 30),
                       child: InkWell(
-                        onTap: (){},
+                        onTap: (){
+                           scaffoldkey.currentState!.showBottomSheet((context) => 
+                            Container(
+                              height: 400,
+                              width: 1000,
+                              color: Color.fromARGB(255, 250, 250, 248),
+                              child: Column(
+                                children: [
+                                  const SizedBox(height: 30,),
+                                  plan_note(title: "plan",icon: Icons.calendar_today,onpress: (){},),
+                                  const SizedBox(height: 10,),
+                                  plan_note(title: "note",icon: Icons.article,onpress: (){
+                                   Navigator.of(context).pushNamed("addnote");
+                                  },),
+                                  const SizedBox(height: 5,),
+                                    ListView(
+                                      children: [
+                                        const SizedBox(width: 10,),
+                                        FutureBuilder(
+                                        future:getnote() ,
+                                        builder: (BuildContext context,AsyncSnapshot snapshot) {
+                                         if (snapshot.hasData) { 
+                                          if(snapshot.data['status']=='fail')
+                                          return Center(child: Text("there is no notes",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),);
+                                          return ListView.builder(
+                                            itemCount: snapshot.data['data'].length,
+                                            shrinkWrap: true,
+                                            physics: NeverScrollableScrollPhysics(),
+                                            itemBuilder: (context,i){
+                                            return cardnote(ontap: (){
+                                               Navigator.of(context).push(MaterialPageRoute(builder: (context)=>editenote(notes:snapshot.data['data'][i] ,)));
+
+
+                                            }, title: "${snapshot.data['data'][i]['notes_title']}", content: "${snapshot.data['data'][i]['notes_content']}");
+                                          });
+                                         }
+                                         if (snapshot.connectionState==ConnectionState.waiting) {
+                                           return Center(child: Text("loading . . ."),);
+                                         }
+                                        return Center(child: Text("loading . . ."),);
+                                       },)
+                                        
+                                      ],
+                                    )
+                                   ],
+                           ),
+                         )
+                        );
+                        },
                         child: Container(
                             height: 140,
                             decoration: BoxDecoration(
@@ -143,7 +212,9 @@ ListTile(
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0,left: 15),
                       child: InkWell(
-                        onTap: (){},
+                        onTap: (){
+                           Navigator.of(context).pushNamed("chooseplan_and_ask");
+                        },
                         child: Container(
                             height: 140,
                             decoration: BoxDecoration(
@@ -151,7 +222,7 @@ ListTile(
                               borderRadius: BorderRadius.circular(15),
                             ),
                             width: 120,
-                            child:  const Center(child: Text('Profile',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),))),
+                            child:  const Center(child: Text(' make a plan/ask',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),))),
                       ),
                     ),
                   ],

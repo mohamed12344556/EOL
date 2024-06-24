@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/sub-lit/views/units_list_view.dart';
 import 'package:high_school/Subjects/utils/app_assets.dart';
@@ -7,7 +6,7 @@ import 'package:high_school/models/subject_model.dart';
 class SubjectViewlit extends StatelessWidget {
   const SubjectViewlit({super.key});
 
-  static const List<SubjectModel> subjects = [
+  static List<SubjectModel> subjects = [
     SubjectModel(title: "English", imgPath: Assets.imagesBooks),
     SubjectModel(title: "Biology", imgPath: Assets.imagesMicroscope),
     SubjectModel(title: "Mathematics", imgPath: Assets.imagesTools),
@@ -156,7 +155,7 @@ class _GridItem extends StatelessWidget {
           children: [
             Expanded(
               child: Image.asset(
-                item.imgPath,
+                item.imgPath!,
                 fit: BoxFit.fill,
               ),
             ),
@@ -164,7 +163,7 @@ class _GridItem extends StatelessWidget {
               height: 12,
             ),
             Text(
-              item.title,
+              item.title!,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

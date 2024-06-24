@@ -6,7 +6,6 @@ import 'package:high_school/chooseyourplan_and_ask/ASK/ASK_PDF_URL.dart';
 import 'package:high_school/chooseyourplan_and_ask/ASK/chat_pdf.dart';
 import 'package:high_school/chooseyourplan_and_ask/chooseplan/choice.dart';
 import 'package:high_school/chooseyourplan_and_ask/chooseyourplan_and_ask.dart';
-import 'package:high_school/community/views/community/views/community_view.dart';
 import 'package:high_school/core/localization/language_translation.dart';
 import 'package:high_school/departement/choose_department.dart';
 import 'package:high_school/homes/home_literary.dart';
@@ -17,13 +16,16 @@ import 'package:high_school/plan/note/addnote.dart';
 import 'package:high_school/plan/note/editenote.dart';
 import 'package:high_school/plan/note/yournote.dart';
 import 'package:high_school/services/service_initializer.dart';
+import 'package:high_school/views/community/views/community_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
 late SharedPreferences sharepref;
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
+  await ServiceInitializer().initializeSettings();
   sharepref = await SharedPreferences.getInstance();
   runApp(MyApp());
 }

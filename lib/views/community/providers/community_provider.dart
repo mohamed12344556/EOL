@@ -2,16 +2,17 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:high_school/models/post_model.dart';
 import 'package:high_school/models/user_model.dart';
 import 'package:high_school/services/community_services.dart';
-
-
 import 'package:image_picker/image_picker.dart';
 
 class CommunityProvider extends ChangeNotifier {
   CommunityServices communityServices;
+
   CommunityProvider({required this.communityServices}) {
     initializeUser();
   }
@@ -26,6 +27,7 @@ class CommunityProvider extends ChangeNotifier {
   XFile? image;
   TextEditingController postController = TextEditingController();
   TextEditingController commentController = TextEditingController();
+
   Stream<QuerySnapshot> getPosts() {
     return communityServices.getPosts();
   }

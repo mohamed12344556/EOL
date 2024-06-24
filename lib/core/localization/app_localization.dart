@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:high_school/community/utils/app_constants.dart';
 import 'package:high_school/services/dependency_injection_service.dart';
+import 'package:high_school/utils/app_constants.dart';
 import '../local_data/shared_preferences_services.dart';
 
 enum LanguageType { arabic, english }

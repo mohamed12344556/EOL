@@ -10,14 +10,13 @@ import 'package:high_school/firebase_options.dart';
 import 'package:high_school/services/dependency_injection_service.dart';
 import 'package:high_school/utils/app_constants.dart';
 
-
 class ServiceInitializer {
   ServiceInitializer._();
 
   static final ServiceInitializer instance = ServiceInitializer._();
 
   factory ServiceInitializer() => instance;
-  static late Locale locale = Locale("en");
+  static Locale locale = const Locale('en');
 
   initializeSettings() async {
     await initializeDependencyInjection();

@@ -1,17 +1,14 @@
 
 
 import 'package:flutter/material.dart';
-
-
-
-import 'package:high_school/community/utils/app_constants.dart';
-import 'package:high_school/community/views/community/providers/comments_provider.dart';
-import 'package:high_school/community/views/community/widgets/comment_widget.dart';
 import 'package:high_school/core/localization/app_localization.dart';
 import 'package:high_school/core/widgets/custom_text_field.dart';
 import 'package:high_school/models/comments_model.dart';
 import 'package:high_school/models/post_model.dart';
 import 'package:high_school/services/dependency_injection_service.dart';
+import 'package:high_school/utils/app_constants.dart';
+import 'package:high_school/views/community/providers/comments_provider.dart';
+import 'package:high_school/views/community/widgets/comment_widget.dart';
 import 'package:provider/provider.dart';
 
 class CommentsView extends StatelessWidget {
@@ -82,7 +79,8 @@ class CommentsView extends StatelessWidget {
                                                   child: CustomTextField(
                                                       controller: provider
                                                           .replyController,
-                                                      hintText: tr(AppConstants.typeReply),
+                                                      hintText: tr(AppConstants
+                                                          .typeReply),
                                                       obsecureText: false),
                                                 ),
                                                 IconButton(
@@ -117,8 +115,8 @@ class CommentsView extends StatelessWidget {
                                                       SizedBox(
                                                         height: 20,
                                                       ),
-                                                      Text(
-                                                          tr(AppConstants.confirmDeletePost)),
+                                                      Text(tr(AppConstants
+                                                          .confirmDeletePost)),
                                                       IconButton(
                                                           onPressed: () {
                                                             provider

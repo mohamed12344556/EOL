@@ -55,7 +55,7 @@ class UnitsListView extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      item.title,
+                      item.title!,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 24,

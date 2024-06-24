@@ -1,17 +1,15 @@
-import 'dart:developer';
-
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:high_school/Subjects/utils/app_assets.dart';
-import 'package:high_school/community/utils/app_constants.dart';
-import 'package:high_school/community/utils/utils.dart';
-import 'package:high_school/community/views/community/providers/community_provider.dart';
-import 'package:high_school/community/views/community/views/comments_view.dart';
+import 'package:high_school/Subjects/utils/app_colors.dart';
 import 'package:high_school/core/localization/app_localization.dart';
 import 'package:high_school/models/post_model.dart';
 import 'package:high_school/models/user_model.dart';
+import 'package:high_school/utils/app_constants.dart';
+import 'package:high_school/utils/utils.dart';
+import 'package:high_school/views/community/providers/community_provider.dart';
+import 'package:high_school/views/community/views/comments_view.dart';
 import 'package:provider/provider.dart';
 
 import 'profilepic.dart';
@@ -81,7 +79,8 @@ class MyPost extends StatelessWidget {
                                         const SizedBox(
                                           height: 20,
                                         ),
-                                         Text(tr(AppConstants.confirmDeletePost)),
+                                        Text(
+                                            tr(AppConstants.confirmDeletePost)),
                                         IconButton(
                                             onPressed: () {
                                               provider.deletePost(postModel);
@@ -170,7 +169,7 @@ class MyPost extends StatelessWidget {
                                     color:
                                         snapShot.data == null || !snapShot.data!
                                             ? Colors.grey[400]
-                                            : Colors.red,
+                                            : AppColors.blue,
                                     Assets.like,
                                     fit: BoxFit.fill,
                                   );

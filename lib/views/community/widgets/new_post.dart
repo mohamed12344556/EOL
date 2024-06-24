@@ -1,15 +1,17 @@
 import 'dart:io';
 
 
-import 'package:flutter/material.dart';
 
-import 'package:high_school/community/utils/app_constants.dart';
-import 'package:high_school/community/views/community/providers/community_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:high_school/Subjects/utils/app_colors.dart';
 import 'package:high_school/core/localization/app_localization.dart';
+import 'package:high_school/utils/app_constants.dart';
+import 'package:high_school/views/community/providers/community_provider.dart';
 import 'package:provider/provider.dart';
 
 class NewPost extends StatelessWidget {
   const NewPost({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Consumer<CommunityProvider>(builder: (context, provider, child) {
@@ -18,7 +20,7 @@ class NewPost extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15),
           child: Container(
-            color: Colors.orange[700],
+            color: AppColors.blue,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -56,9 +58,10 @@ class NewPost extends StatelessWidget {
                                 onChanged: (text) {
                                   // do something
                                 },
-                                decoration:  InputDecoration(
+                                decoration: InputDecoration(
                                     hintText: tr(AppConstants.whatsInYourMind),
-                                    hintStyle: const TextStyle(color: Colors.black),
+                                    hintStyle:
+                                        const TextStyle(color: Colors.black),
                                     border: InputBorder.none,
                                     focusedBorder: InputBorder.none,
                                     enabledBorder: InputBorder.none,

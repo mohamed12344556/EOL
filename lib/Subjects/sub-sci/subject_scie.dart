@@ -7,7 +7,7 @@ import 'package:high_school/models/subject_model.dart';
 class SubjectViewsci extends StatelessWidget {
   const SubjectViewsci({super.key});
 
-  static const List<SubjectModel> subjects = [
+  static List<SubjectModel> subjects = [
     SubjectModel(title: "English", imgPath: Assets.imagesBooks),
     SubjectModel(title: "Biology", imgPath: Assets.imagesMicroscope),
     SubjectModel(title: "Mathematics", imgPath: Assets.imagesTools),
@@ -156,7 +156,7 @@ class _GridItem extends StatelessWidget {
           children: [
             Expanded(
               child: Image.asset(
-                item.imgPath,
+                item.imgPath!,
                 fit: BoxFit.fill,
               ),
             ),
@@ -164,7 +164,7 @@ class _GridItem extends StatelessWidget {
               height: 12,
             ),
             Text(
-              item.title,
+              item.title!,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

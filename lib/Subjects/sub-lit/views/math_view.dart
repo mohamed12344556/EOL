@@ -7,7 +7,7 @@ import 'package:high_school/models/subject_model.dart';
 class MathView extends StatelessWidget {
   const MathView({super.key});
 
-  static const List<SubjectModel> subjects = [
+  static List<SubjectModel> subjects = [
     SubjectModel(title: "Algebra", imgPath: Assets.imagesBooks),
     SubjectModel(title: "Dynamics", imgPath: Assets.imagesBooks),
     SubjectModel(title: "Statics", imgPath: Assets.imagesBooks),
@@ -79,12 +79,12 @@ class CustomSubjectItem extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(item.imgPath),
+              Image.asset(item.imgPath!),
               SizedBox(
                 width: 10,
               ),
               Text(
-                item.title,
+                item.title!,
                 style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,

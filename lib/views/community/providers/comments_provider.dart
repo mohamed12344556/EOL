@@ -11,6 +11,7 @@ import 'package:high_school/services/community_services.dart';
 
 class CommentsProvider extends ChangeNotifier {
   CommunityServices communityServices;
+
   CommentsProvider({required this.communityServices}) {
     initializeUser();
   }

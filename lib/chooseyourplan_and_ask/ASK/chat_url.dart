@@ -95,7 +95,7 @@ class _ChatPage2State extends State<ChatPage2> with TickerProviderStateMixin {
         print("Question sent successfully");
         var responseData = jsonDecode(response.body);
         String decodedResponse =
-        utf8.decode(responseData["response"].runes.toList());
+            utf8.decode(responseData["response"].runes.toList());
         print("Response data: $decodedResponse");
 
         setState(() {
@@ -168,7 +168,7 @@ class _ChatPage2State extends State<ChatPage2> with TickerProviderStateMixin {
                 }
                 return Container(
                   padding:
-                  EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
+                      EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
                   child: Align(
                     alignment: (_chatHistory[index]["isSender"]
                         ? Alignment.topRight
@@ -211,7 +211,7 @@ class _ChatPage2State extends State<ChatPage2> with TickerProviderStateMixin {
             alignment: Alignment.bottomCenter,
             child: Container(
               padding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               height: 60,
               width: double.infinity,
               color: Colors.white,
@@ -329,8 +329,8 @@ class _TypingIndicatorState extends State<TypingIndicator>
               opacity: index == 0
                   ? _dotAnimation.value
                   : (index == 1
-                  ? _dotAnimation.value * 0.5
-                  : _dotAnimation.value * 0.25),
+                      ? _dotAnimation.value * 0.5
+                      : _dotAnimation.value * 0.25),
               child: child,
             );
           },

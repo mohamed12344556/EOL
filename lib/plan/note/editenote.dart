@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
 import 'package:high_school/componet/crud.dart';
@@ -56,46 +57,46 @@ class _EditNoteState extends State<EditNote> {
       ),
       body: isLoading == true
           ? Center(
-        child: CircularProgressIndicator(),
-      )
+              child: CircularProgressIndicator(),
+            )
           : Container(
-        padding: EdgeInsets.all(10),
-        child: Form(
-          key: formstate,
-          child: ListView(
-            children: [
-              custtextform(
-                hint: "title",
-                mycontroller: title,
-                valid: (val) {
-                  return validinput(val!, 1, 40);
-                },
+              padding: EdgeInsets.all(10),
+              child: Form(
+                key: formstate,
+                child: ListView(
+                  children: [
+                    custtextform(
+                      hint: "title",
+                      mycontroller: title,
+                      valid: (val) {
+                        return validinput(val!, 1, 40);
+                      },
+                    ),
+                    custtextform(
+                      hint: "new content",
+                      mycontroller: content,
+                      valid: (val) {
+                        return validinput(val!, 5, 255);
+                      },
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        MaterialButton(
+                          onPressed: () async {
+                            await EditNote();
+                          },
+                          child: Text("edite"),
+                          textColor: Colors.white,
+                          color: AppColors.blue.withOpacity(0.4),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              custtextform(
-                hint: "new content",
-                mycontroller: content,
-                valid: (val) {
-                  return validinput(val!, 5, 255);
-                },
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  MaterialButton(
-                    onPressed: () async {
-                      await EditNote();
-                    },
-                    child: Text("edite"),
-                    textColor: Colors.white,
-                    color: AppColors.blue.withOpacity(0.4),
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }

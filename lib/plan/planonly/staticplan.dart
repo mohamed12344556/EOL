@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
 import 'package:high_school/plan/planonly/ScedulePage.dart';
@@ -39,121 +38,121 @@ class _StaticPalnState extends State<StaticPaln> {
               columns: const [
                 DataColumn(
                     label: SizedBox(
-                      width: 120,
-                      child: Text(
-                        'الوقت/اليوم',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: AppColors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    )),
+                  width: 120,
+                  child: Text(
+                    'الوقت/اليوم',
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: AppColors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                )),
                 DataColumn(
                     label: SizedBox(
-                      width: 120,
-                      child: Text(
-                        'الى : من',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: AppColors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    )),
+                  width: 120,
+                  child: Text(
+                    'الى : من',
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: AppColors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                )),
                 DataColumn(
                     label: SizedBox(
-                      width: 120,
-                      child: Text(
-                        'المادة 1',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: AppColors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    )),
+                  width: 120,
+                  child: Text(
+                    'المادة 1',
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: AppColors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                )),
                 DataColumn(
                     label: SizedBox(
-                      width: 120,
-                      child: Text(
-                        'الى : من',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: AppColors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    )),
+                  width: 120,
+                  child: Text(
+                    'الى : من',
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: AppColors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                )),
                 DataColumn(
                     label: SizedBox(
-                      width: 120,
-                      child: Text(
-                        'المادة 2',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: AppColors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    )),
+                  width: 120,
+                  child: Text(
+                    'المادة 2',
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: AppColors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                )),
                 DataColumn(
                     label: SizedBox(
-                      width: 120,
-                      child: Text(
-                        'الى : من',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: AppColors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    )),
+                  width: 120,
+                  child: Text(
+                    'الى : من',
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: AppColors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                )),
                 DataColumn(
                     label: SizedBox(
-                      width: 120,
-                      child: Text(
-                        'المادة 3',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: AppColors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    )),
+                  width: 120,
+                  child: Text(
+                    'المادة 3',
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: AppColors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                )),
                 DataColumn(
                     label: SizedBox(
-                      width: 120,
-                      child: Text(
-                        'الى : من',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: AppColors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    )),
+                  width: 120,
+                  child: Text(
+                    'الى : من',
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: AppColors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                )),
                 DataColumn(
                     label: SizedBox(
-                      width: 120,
-                      child: Text(
-                        'المادة 4',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: AppColors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    )),
+                  width: 120,
+                  child: Text(
+                    'المادة 4',
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: AppColors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                )),
               ],
               rows: SchedulePage.scheduleData.map((data) {
                 return DataRow(cells: [

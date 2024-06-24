@@ -1,5 +1,7 @@
 import 'dart:io';
 
+
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:high_school/core/local_data/shared_preferences_services.dart';
@@ -8,13 +10,14 @@ import 'package:high_school/firebase_options.dart';
 import 'package:high_school/services/dependency_injection_service.dart';
 import 'package:high_school/utils/app_constants.dart';
 
+
 class ServiceInitializer {
   ServiceInitializer._();
 
   static final ServiceInitializer instance = ServiceInitializer._();
 
   factory ServiceInitializer() => instance;
-  static Locale locale = const Locale( 'en');
+  static late Locale locale = Locale("en");
 
   initializeSettings() async {
     await initializeDependencyInjection();

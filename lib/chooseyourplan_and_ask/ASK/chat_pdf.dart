@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -107,7 +106,7 @@ class _ChatPage1State extends State<ChatPage1> with TickerProviderStateMixin {
         var responseData = jsonDecode(response.body);
         // Convert response to UTF-8 before displaying
         String decodedResponse =
-        utf8.decode(responseData["response"].runes.toList());
+            utf8.decode(responseData["response"].runes.toList());
         print("Response data: $decodedResponse"); // Print decoded response
         setState(() {
           _chatHistory.add({"message": decodedResponse, "isSender": false});
@@ -211,7 +210,7 @@ class _ChatPage1State extends State<ChatPage1> with TickerProviderStateMixin {
                 }
                 return Container(
                   padding:
-                  EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
+                      EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
                   child: Align(
                     alignment: (_chatHistory[index]["isSender"]
                         ? Alignment.topRight
@@ -260,7 +259,7 @@ class _ChatPage1State extends State<ChatPage1> with TickerProviderStateMixin {
             alignment: Alignment.bottomCenter,
             child: Container(
               padding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               height: 60,
               width: double.infinity,
               color: Colors.white,
@@ -424,8 +423,8 @@ class _TypingIndicatorState extends State<TypingIndicator>
               opacity: index == 0
                   ? _dotAnimation.value
                   : (index == 1
-                  ? _dotAnimation.value * 0.5
-                  : _dotAnimation.value * 0.25),
+                      ? _dotAnimation.value * 0.5
+                      : _dotAnimation.value * 0.25),
               child: child,
             );
           },

@@ -25,7 +25,6 @@ abstract class SharedPreferencesServices {
   Future<bool> clearAll();
 
   Future<bool> clearKey({required key});
-
   bool checkByKey({required key});
 }
 

@@ -1,3 +1,4 @@
+
 class SubjectModel {
   final String title;
   final String imgPath;

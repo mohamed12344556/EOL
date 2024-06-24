@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
+import 'package:high_school/community/utils/app_constants.dart';
 import 'package:high_school/core/localization/app_localization.dart';
-import 'package:high_school/utils/app_constants.dart';
 
 class ContactView extends StatelessWidget {
   const ContactView({super.key});
@@ -31,7 +31,7 @@ class ContactView extends StatelessWidget {
             const SizedBox(
               height: 26,
             ),
-            Center(
+             Center(
               child: Text(
                 tr(AppConstants.contactTxt),
                 style: const TextStyle(
@@ -57,7 +57,7 @@ class ContactView extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(
+                     Row(
                       children: [
                         Expanded(
                           child: CustomContactTextFormField(
@@ -77,13 +77,13 @@ class ContactView extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
-                    CustomContactTextFormField(
+                     CustomContactTextFormField(
                       hintText: tr(AppConstants.fullNameTxt),
                     ),
                     const SizedBox(
                       height: 16,
                     ),
-                    CustomContactTextFormField(
+                     CustomContactTextFormField(
                       hintText: tr(AppConstants.messageName),
                       isMessage: true,
                     ),
@@ -107,10 +107,8 @@ class ContactView extends StatelessWidget {
 class CustomContactTextFormField extends StatelessWidget {
   const CustomContactTextFormField(
       {super.key, required this.hintText, this.isMessage = false});
-
   final String hintText;
   final bool isMessage;
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -152,7 +150,7 @@ Widget buildSendButton() {
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
             color: AppColors.yellow, borderRadius: BorderRadius.circular(14)),
-        child: Text(
+        child:  Text(
           tr(AppConstants.send),
           style: const TextStyle(
             fontSize: 18,

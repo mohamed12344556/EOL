@@ -1,5 +1,6 @@
+
 import 'package:flutter/material.dart';
-import 'package:high_school/Subjects/sub-sci/views/units_list_view.dart';
+import 'package:high_school/Subjects/sub-lit/views/units_list_view.dart';
 import 'package:high_school/Subjects/utils/app_assets.dart';
 import 'package:high_school/models/subject_model.dart';
 

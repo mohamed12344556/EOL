@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:high_school/Subjects/utils/app_assets.dart';
 import 'package:high_school/models/comment_reply.dart';
-import 'package:high_school/utils/app_assets.dart';
 
 class CommentReplyWidget extends StatelessWidget {
   final CommentReplyModel commentReplyModel;

@@ -133,8 +133,8 @@ class _HomeMathematicsState extends State<HomeMathematics> with Crud {
 
   ListTile _buildDrawerItem(
       {required String title,
-        required IconData icon,
-        required VoidCallback onTap}) {
+      required IconData icon,
+      required VoidCallback onTap}) {
     return ListTile(
       title: Text(title),
       leading: Icon(icon),
@@ -146,7 +146,7 @@ class _HomeMathematicsState extends State<HomeMathematics> with Crud {
     return SafeArea(
       child: Padding(
         padding:
-        const EdgeInsets.only(left: 25.0, right: 25, top: 60, bottom: 90),
+            const EdgeInsets.only(left: 25.0, right: 25, top: 60, bottom: 90),
         child: Container(
           height: double.infinity,
           decoration: BoxDecoration(
@@ -208,7 +208,7 @@ class _HomeMathematicsState extends State<HomeMathematics> with Crud {
             title: "Plan/Note",
             onTap: () {
               scaffoldKey.currentState!.showBottomSheet(
-                    (context) => _buildBottomSheet(context),
+                (context) => _buildBottomSheet(context),
               );
             },
           ),

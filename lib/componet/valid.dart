@@ -1,3 +1,4 @@
+
 import 'package:high_school/constant/message.dart';
 
 validinput(String value, int min, int max) {

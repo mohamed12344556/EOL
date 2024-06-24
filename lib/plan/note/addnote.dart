@@ -1,26 +1,28 @@
+
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
 import 'package:high_school/componet/crud.dart';
 import 'package:high_school/componet/valid.dart';
 import 'package:high_school/constant/link.dart';
 import 'package:high_school/main.dart';
-import 'package:high_school/plan/note/custtextform.dart';
 
-class addnote extends StatefulWidget {
-  const addnote({super.key});
+import 'custtextform.dart';
+
+class AddNote extends StatefulWidget {
+  const AddNote({super.key});
 
   @override
-  State<addnote> createState() => _addnoteState();
+  State<AddNote> createState() => _AddNoteState();
 }
 
-class _addnoteState extends State<addnote> with Crud {
+class _AddNoteState extends State<AddNote> with Crud {
   GlobalKey<FormState> formstate = GlobalKey<FormState>();
   TextEditingController title = TextEditingController();
   TextEditingController content = TextEditingController();
 
   bool isLoading = false;
 
-  addnote() async {
+  AddNote() async {
     if (formstate.currentState!.validate()) {
       isLoading = true;
       setState(() {});
@@ -75,7 +77,7 @@ class _addnoteState extends State<addnote> with Crud {
                       children: [
                         MaterialButton(
                           onPressed: () async {
-                            await addnote();
+                            await AddNote();
                           },
                           child: Text("save"),
                           textColor: Colors.white,

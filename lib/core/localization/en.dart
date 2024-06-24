@@ -38,5 +38,5 @@ Map<String, String> coreEn = {
   'ConfirmDeletePost': 'Are you sure to delete Post?',
   'Type Reply': 'Type Reply',
   'ConfirmDeleteComment': 'Are you sure to delete comment?',
-  'Type Comment': 'Type Comment',
+  'Type Comment':'Type Comment',
 };

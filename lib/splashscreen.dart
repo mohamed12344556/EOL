@@ -1,9 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:high_school/login/sign/login.dart';
 import 'package:lottie/lottie.dart';
+
+import 'login/sign/login.dart';
 
 class splashscreen extends StatefulWidget {
   const splashscreen({super.key});

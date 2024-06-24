@@ -11,7 +11,6 @@ class CommentLikesMdoel {
       required this.uid,
       required this.commentId,
       required this.timestamp});
-
   factory CommentLikesMdoel.fromJson(Map<String, dynamic> json) {
     return CommentLikesMdoel(
         id: json['id'],

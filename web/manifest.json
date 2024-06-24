@@ -1,6 +1,6 @@
 {
-    "name": "eol_project",
-    "short_name": "eol_project",
+    "name": "eol",
+    "short_name": "eol",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

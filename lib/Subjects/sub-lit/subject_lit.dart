@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/sub-lit/views/units_list_view.dart';
 import 'package:high_school/Subjects/utils/app_assets.dart';
@@ -19,21 +20,21 @@ class SubjectViewlit extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               width: double.infinity,
               height: 120,
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 10,
                 vertical: 10,
               ),
               margin: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                   colors: [
                     Color.fromARGB(255, 238, 74, 74),
                     Color.fromARGB(255, 219, 204, 73)
@@ -49,15 +50,15 @@ class SubjectViewlit extends StatelessWidget {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.white,
                         size: 22,
                       )),
-                  SizedBox(
+                  const SizedBox(
                     width: 4,
                   ),
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
@@ -86,11 +87,11 @@ class SubjectViewlit extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 22,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
+            const Padding(
+              padding: EdgeInsets.symmetric(
                 horizontal: 20,
               ),
               child: Text(
@@ -103,9 +104,9 @@ class SubjectViewlit extends StatelessWidget {
             ),
             GridView.builder(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.all(12),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                physics: const NeverScrollableScrollPhysics(),
+                padding: const EdgeInsets.all(12),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                 ),
                 itemCount: subjects.length,
@@ -138,12 +139,12 @@ class _GridItem extends StatelessWidget {
         );
       },
       child: Container(
-        padding: EdgeInsets.all(18),
-        margin: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(18),
+        margin: const EdgeInsets.all(12),
         decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [
-              BoxShadow(
+              const BoxShadow(
                 color: Colors.black45,
                 blurRadius: 12,
                 spreadRadius: 2,
@@ -159,12 +160,12 @@ class _GridItem extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             Text(
               item.title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),

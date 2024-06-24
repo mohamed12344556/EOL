@@ -46,7 +46,7 @@ class Ask_Page extends StatelessWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.blue // Background color
-                  ),
+                      ),
                   onPressed: () {
                     Navigator.of(context).pushNamed("chatpdf");
                   },

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
 import 'package:high_school/Subjects/utils/fonts.dart';
@@ -92,11 +93,11 @@ class _ChoicePlanState extends State<ChoicePlan> {
                     groupValue: selectedAnswer,
                     onChanged: selectedAnswer == null
                         ? (value) {
-                      setState(() {
-                        selectedAnswer = value;
-                        updateSubjects(value!);
-                      });
-                    }
+                            setState(() {
+                              selectedAnswer = value;
+                              updateSubjects(value!);
+                            });
+                          }
                         : null,
                   ),
                   RadioListTile<String>(
@@ -105,11 +106,11 @@ class _ChoicePlanState extends State<ChoicePlan> {
                     groupValue: selectedAnswer,
                     onChanged: selectedAnswer == null
                         ? (value) {
-                      setState(() {
-                        selectedAnswer = value;
-                        updateSubjects(value!);
-                      });
-                    }
+                            setState(() {
+                              selectedAnswer = value;
+                              updateSubjects(value!);
+                            });
+                          }
                         : null,
                   ),
                   RadioListTile<String>(
@@ -118,11 +119,11 @@ class _ChoicePlanState extends State<ChoicePlan> {
                     groupValue: selectedAnswer,
                     onChanged: selectedAnswer == null
                         ? (value) {
-                      setState(() {
-                        selectedAnswer = value;
-                        updateSubjects(value!);
-                      });
-                    }
+                            setState(() {
+                              selectedAnswer = value;
+                              updateSubjects(value!);
+                            });
+                          }
                         : null,
                   ),
                   const SizedBox(height: 20),
@@ -140,7 +141,7 @@ class _ChoicePlanState extends State<ChoicePlan> {
                             child: const Text(
                               'ما هي مدة الدراسة',
                               style:
-                              TextStyle(fontSize: 24, color: Colors.white),
+                                  TextStyle(fontSize: 24, color: Colors.white),
                             ),
                           ),
                         ),
@@ -176,7 +177,7 @@ class _ChoicePlanState extends State<ChoicePlan> {
                             child: const Text(
                               'ما هي مدة الاستراحة',
                               style:
-                              TextStyle(fontSize: 24, color: Colors.white),
+                                  TextStyle(fontSize: 24, color: Colors.white),
                             ),
                           ),
                         ),
@@ -212,7 +213,7 @@ class _ChoicePlanState extends State<ChoicePlan> {
                             child: const Text(
                               'ما هو وقت الدراسة',
                               style:
-                              TextStyle(fontSize: 24, color: Colors.white),
+                                  TextStyle(fontSize: 24, color: Colors.white),
                             ),
                           ),
                         ),
@@ -292,7 +293,7 @@ class _ChoicePlanState extends State<ChoicePlan> {
                     onPressed: _isSubmitEnabled() ? submitAnswer : null,
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                            (Set<MaterialState> states) {
+                        (Set<MaterialState> states) {
                           if (states.contains(MaterialState.disabled)) {
                             return Colors.grey;
                           }

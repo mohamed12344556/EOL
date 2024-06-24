@@ -11,6 +11,7 @@ import 'package:high_school/plan/plan_note_showbottom.dart';
 import 'package:high_school/plan/planonly/staticplan.dart';
 import 'package:lottie/lottie.dart';
 
+
 // import '../staticplan.dart';
 
 class HomeScientific extends StatefulWidget {
@@ -51,15 +52,9 @@ class _HomeScientificState extends State<HomeScientific> with Crud {
           fontSize: 30,
           letterSpacing: 3,
           fontWeight: FontWeight.bold,
-          fontFamily: 'Smooch-Regular',
+          fontFamily: "MontserratAlternates-MediumItalic",
         ),
       ),
-      actions: const [
-        Padding(
-          padding: EdgeInsets.all(15.0),
-          child: Icon(Icons.search),
-        ),
-      ],
     );
   }
 
@@ -122,7 +117,9 @@ class _HomeScientificState extends State<HomeScientific> with Crud {
             subtitle: Text(
               "ibrahimmahmed@gmail.com",
               maxLines: 1,
-              style: TextStyle(fontSize: 13),
+              style: TextStyle(
+                fontSize: 13,
+              ),
             ),
           ),
         ),
@@ -238,18 +235,25 @@ class _HomeScientificState extends State<HomeScientific> with Crud {
           duration: const Duration(milliseconds: 200),
           height: isHovered ? 160 : 140,
           decoration: BoxDecoration(
-            color: AppColors.blue,
-            borderRadius: BorderRadius.circular(15),
-          ),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black45,
+                  blurRadius: 12,
+                  spreadRadius: 2,
+                  offset: Offset(8, 8),
+                ),
+              ],
+              borderRadius: BorderRadius.circular(20)),
           width: 120,
           child: Center(
             child: Text(
               title,
               style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  fontFamily: "MontserratAlternates-MediumItalic"),
             ),
           ),
         ),
@@ -269,8 +273,8 @@ class _HomeScientificState extends State<HomeScientific> with Crud {
             title: "Plan",
             icon: Icons.calendar_today,
             onpress: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const StaticPaln()));
+              // Navigator.of(context).push(
+              //     MaterialPageRoute(builder: (context) => const StaticPaln()));
             },
           ),
           const SizedBox(height: 10),

@@ -399,7 +399,7 @@ class _ChoicePlanState extends State<ChoicePlan> {
       // طباعة شكل الطلب
       print('Request body: $jsonData');
 
-      var url = Uri.parse('https://predict-3.onrender.com/predict/');
+      var url = Uri.parse('http://192.168.1.5:8000/predict/');//https://predict-3.onrender.com/predict/
       var response = await http.post(
         url,
         headers: {"Content-Type": "application/json"},

@@ -67,7 +67,7 @@ class _ChatPage2State extends State<ChatPage2> with TickerProviderStateMixin {
   }
 
   void questionFromUserWithUrl(String question) async {
-    final uri = Uri.parse("http://192.168.1.5:8000/chaturl/?url=${widget.url}");
+    final uri = Uri.parse("http://192.168.1.5:8100/chaturl/?url=${widget.url}");
 
     Map<String, dynamic> request = {
       "question": question,

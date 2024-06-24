@@ -56,7 +56,7 @@ class _ChatPage1State extends State<ChatPage1> with TickerProviderStateMixin {
 
   Future<void> uploadFile(File file) async {
     var request = http.MultipartRequest(
-        'POST', Uri.parse('http://192.168.1.5:8000/upload/'));
+        'POST', Uri.parse('http://192.168.1.5:8100/upload/'));
     request.files.add(await http.MultipartFile.fromPath('file', file.path));
 
     try {
@@ -84,7 +84,7 @@ class _ChatPage1State extends State<ChatPage1> with TickerProviderStateMixin {
   }
 
   Future<void> questionFromUser(String question) async {
-    final uri = Uri.parse("http://192.168.1.5:8000/chatpdf/");
+    final uri = Uri.parse("http://192.168.1.5:8100/chatpdf/");
 
     Map<String, dynamic> request = {
       "question": question,

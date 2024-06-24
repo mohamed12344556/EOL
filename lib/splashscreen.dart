@@ -13,26 +13,35 @@ class splashscreen extends StatefulWidget {
 }
 
 class _splashscreenState extends State<splashscreen> {
+  var _time;
 
-var _time;
+  start() {
+    _time = Timer(
+        Duration(
+          seconds: 6,
+        ),
+        call);
+  }
 
-start(){
-_time=Timer(Duration(seconds: 6,), call);
+  void call() {
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Login(),
+        ));
+  }
 
-}
-void call(){
-  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => login(),));
-}
-@override
-void initstate(){
-  start();
-  super.initState();
-}
-@override
-void dispose(){
-  _time.cancel();
-  super.dispose();
-}
+  @override
+  void initstate() {
+    start();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _time.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +55,11 @@ void dispose(){
         ),
         backgroundColor: Color(0xff55598d),
       ),
-   body: Center(child: Lottie.asset('images/Animation - 1713312927949.json',),),
+      body: Center(
+        child: Lottie.asset(
+          'images/Animation - 1713312927949.json',
+        ),
+      ),
     );
   }
 }

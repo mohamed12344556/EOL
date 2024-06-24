@@ -1,26 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-void main() {
-  runApp(MyApp());
-}
+import 'package:flutter/material.dart';
+import 'package:high_school/Subjects/utils/app_colors.dart';
+import 'package:high_school/Subjects/utils/fonts.dart';
+import 'package:high_school/plan/planonly/ScedulePage.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
-class MyApp extends StatelessWidget {
+class ChoicePlan extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: QuizPage(),
-    );
-  }
+  _ChoicePlanState createState() => _ChoicePlanState();
 }
 
-class QuizPage extends StatefulWidget {
-  @override
-  _QuizPageState createState() => _QuizPageState();
-}
-
-class _QuizPageState extends State<QuizPage> {
+class _ChoicePlanState extends State<ChoicePlan> {
   String? selectedAnswer;
   int? time;
   double? reset;
@@ -46,184 +38,279 @@ class _QuizPageState extends State<QuizPage> {
   Map<String, int?> subjectLevels = {};
 
   @override
+  void initState() {
+    super.initState();
+    _loadDepartment();
+  }
+
+  Future<void> _loadDepartment() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      selectedAnswer = prefs.getString('department');
+      if (selectedAnswer != null) {
+        updateSubjects(selectedAnswer!);
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('اختار'),
+        title: const Text(
+          ' اختار خطتك',
+          style: TextStyle(fontSize: 45, fontFamily: Appfonts.fontfamilymont),
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                'ما هي الشعبة',
-                style: TextStyle(fontSize: 24),
-              ),
-              SizedBox(height: 20),
-              RadioListTile<String>(
-                title: Text('علوم'),
-                value: 'علوم',
-                groupValue: selectedAnswer,
-                onChanged: (value) {
-                  setState(() {
-                    selectedAnswer = value;
-                    updateSubjects(value!);
-                  });
-                },
-              ),
-              RadioListTile<String>(
-                title: Text('ادبي'),
-                value: 'ادبي',
-                groupValue: selectedAnswer,
-                onChanged: (value) {
-                  setState(() {
-                    selectedAnswer = value;
-                    updateSubjects(value!);
-                  });
-                },
-              ),
-              RadioListTile<String>(
-                title: Text('رياضة'),
-                value: 'رياضة',
-                groupValue: selectedAnswer,
-                onChanged: (value) {
-                  setState(() {
-                    selectedAnswer = value;
-                    updateSubjects(value!);
-                  });
-                },
-              ),
-              SizedBox(height: 20),
-              if (selectedAnswer != null)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      'ما هي مدة الدراسة',
-                      style: TextStyle(fontSize: 24),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(
+                left: 60.0, right: 30, top: 60, bottom: 90),
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: AppColors.bluelight,
                     ),
-                    SizedBox(height: 20),
-                    RadioListTile<int>(
-                      title: Text('ساعاتان'),
-                      value: 2,
-                      groupValue: time,
-                      onChanged: (value) {
-                        setState(() {
-                          time = value;
-                        });
-                      },
+                    child: Center(
+                      child: const Text(
+                        'ما هي شعبتك',
+                        style: TextStyle(fontSize: 24, color: Colors.white),
+                      ),
                     ),
-                    RadioListTile<int>(
-                      title: Text('ثلاث ساعات'),
-                      value: 3,
-                      groupValue: time,
-                      onChanged: (value) {
-                        setState(() {
-                          time = value;
-                        });
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      'ما هي مدة الاستراحة',
-                      style: TextStyle(fontSize: 24),
-                    ),
-                    SizedBox(height: 20),
-                    RadioListTile<double>(
-                      title: Text('نصف ساعة'),
-                      value: 0.5,
-                      groupValue: reset,
-                      onChanged: (value) {
-                        setState(() {
-                          reset = value;
-                        });
-                      },
-                    ),
-                    RadioListTile<double>(
-                      title: Text('ساعة'),
-                      value: 1,
-                      groupValue: reset,
-                      onChanged: (value) {
-                        setState(() {
-                          reset = value;
-                        });
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      'ما هو وقت الدراسة',
-                      style: TextStyle(fontSize: 24),
-                    ),
-                    SizedBox(height: 20),
-                    RadioListTile<String>(
-                      title: Text('صباحاً'),
-                      value: 'صباحاً',
-                      groupValue: timeStudy,
-                      onChanged: (value) {
-                        setState(() {
-                          timeStudy = value;
-                        });
-                      },
-                    ),
-                    RadioListTile<String>(
-                      title: Text('مساءاً'),
-                      value: 'مساءاً',
-                      groupValue: timeStudy,
-                      onChanged: (value) {
-                        setState(() {
-                          timeStudy = value;
-                        });
-                      },
-                    ),
-                    SizedBox(height: 20),
-                  ],
-                ),
-              if (currentSubjects.isNotEmpty)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: currentSubjects.map((subject) {
-                    return Column(
+                  ),
+                  const SizedBox(height: 20),
+                  RadioListTile<String>(
+                    title: const Text('علوم'),
+                    value: 'علوم',
+                    groupValue: selectedAnswer,
+                    onChanged: selectedAnswer == null
+                        ? (value) {
+                      setState(() {
+                        selectedAnswer = value;
+                        updateSubjects(value!);
+                      });
+                    }
+                        : null,
+                  ),
+                  RadioListTile<String>(
+                    title: const Text('ادبي'),
+                    value: 'ادبي',
+                    groupValue: selectedAnswer,
+                    onChanged: selectedAnswer == null
+                        ? (value) {
+                      setState(() {
+                        selectedAnswer = value;
+                        updateSubjects(value!);
+                      });
+                    }
+                        : null,
+                  ),
+                  RadioListTile<String>(
+                    title: const Text('رياضة'),
+                    value: 'رياضة',
+                    groupValue: selectedAnswer,
+                    onChanged: selectedAnswer == null
+                        ? (value) {
+                      setState(() {
+                        selectedAnswer = value;
+                        updateSubjects(value!);
+                      });
+                    }
+                        : null,
+                  ),
+                  const SizedBox(height: 20),
+                  if (selectedAnswer != null)
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text(
-                          'ما مستواك في $subject',
-                          style: TextStyle(fontSize: 24),
+                        Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: AppColors.bluelight,
+                          ),
+                          child: Center(
+                            child: const Text(
+                              'ما هي مدة الدراسة',
+                              style:
+                              TextStyle(fontSize: 24, color: Colors.white),
+                            ),
+                          ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         RadioListTile<int>(
-                          title: Text('جيد'),
-                          value: 0,
-                          groupValue: subjectLevels[subject],
+                          title: const Text('ساعاتان'),
+                          value: 2,
+                          groupValue: time,
                           onChanged: (value) {
                             setState(() {
-                              subjectLevels[subject] = value;
+                              time = value;
                             });
                           },
                         ),
                         RadioListTile<int>(
-                          title: Text('ضعيف'),
+                          title: const Text('ثلاث ساعات'),
+                          value: 3,
+                          groupValue: time,
+                          onChanged: (value) {
+                            setState(() {
+                              time = value;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: AppColors.bluelight,
+                          ),
+                          child: Center(
+                            child: const Text(
+                              'ما هي مدة الاستراحة',
+                              style:
+                              TextStyle(fontSize: 24, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        RadioListTile<double>(
+                          title: const Text('نصف ساعة'),
+                          value: 0.5,
+                          groupValue: reset,
+                          onChanged: (value) {
+                            setState(() {
+                              reset = value;
+                            });
+                          },
+                        ),
+                        RadioListTile<double>(
+                          title: const Text('ساعة'),
                           value: 1,
-                          groupValue: subjectLevels[subject],
+                          groupValue: reset,
                           onChanged: (value) {
                             setState(() {
-                              subjectLevels[subject] = value;
+                              reset = value;
                             });
                           },
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
+                        Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: AppColors.bluelight,
+                          ),
+                          child: Center(
+                            child: const Text(
+                              'ما هو وقت الدراسة',
+                              style:
+                              TextStyle(fontSize: 24, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        RadioListTile<String>(
+                          title: const Text('صباحاً'),
+                          value: 'صباحاً',
+                          groupValue: timeStudy,
+                          onChanged: (value) {
+                            setState(() {
+                              timeStudy = value;
+                            });
+                          },
+                        ),
+                        RadioListTile<String>(
+                          title: const Text('مساءاً'),
+                          value: 'مساءاً',
+                          groupValue: timeStudy,
+                          onChanged: (value) {
+                            setState(() {
+                              timeStudy = value;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 20),
                       ],
-                    );
-                  }).toList(),
-                ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: submitAnswer,
-                child: Text('Submit Answer'),
+                    ),
+                  if (currentSubjects.isNotEmpty)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: currentSubjects.map((subject) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: AppColors.bluelight,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'ما مستواك في $subject',
+                                  style: const TextStyle(
+                                      fontSize: 24, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            RadioListTile<int>(
+                              title: const Text('جيد'),
+                              value: 1,
+                              groupValue: subjectLevels[subject],
+                              onChanged: (value) {
+                                setState(() {
+                                  subjectLevels[subject] = value;
+                                });
+                              },
+                            ),
+                            RadioListTile<int>(
+                              title: const Text('ضعيف'),
+                              value: 0,
+                              groupValue: subjectLevels[subject],
+                              onChanged: (value) {
+                                setState(() {
+                                  subjectLevels[subject] = value;
+                                });
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                          ],
+                        );
+                      }).toList(),
+                    ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: _isSubmitEnabled() ? submitAnswer : null,
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.disabled)) {
+                            return Colors.grey;
+                          }
+                          return Color(
+                              0xFF102C57); // اللون الافتراضي عندما يكون الزر مفعل
+                        },
+                      ),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                    ),
+                    child: const Text(
+                      'Submit Answer',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -268,8 +355,17 @@ class _QuizPageState extends State<QuizPage> {
     });
   }
 
+  bool _isSubmitEnabled() {
+    return selectedAnswer != null &&
+        time != null &&
+        reset != null &&
+        timeStudy != null &&
+        subjectLevels.isNotEmpty &&
+        currentSubjects.every((subject) => subjectLevels.containsKey(subject));
+  }
+
   void submitAnswer() async {
-    if (selectedAnswer != null && time != null && reset != null && timeStudy != null && subjectLevels.isNotEmpty) {
+    if (_isSubmitEnabled()) {
       var data = {
         'الشعبة': selectedAnswer!,
         'مدة_الدراسة': time!,
@@ -311,7 +407,21 @@ class _QuizPageState extends State<QuizPage> {
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
       if (response.statusCode == 200) {
-        print('تم إرسال الإجابة بنجاح');
+        var responseData = jsonDecode(response.body);
+        int planNumber = responseData['predictions'][0];
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SchedulePage(
+              planNumber: planNumber,
+              selectedAnswer: selectedAnswer!,
+              time: time!,
+              reset: reset!,
+              timeStudy: timeStudy!,
+              subjectLevels: subjectLevels,
+            ),
+          ),
+        );
       } else {
         print('فشل في إرسال الإجابة');
       }
@@ -319,5 +429,4 @@ class _QuizPageState extends State<QuizPage> {
       print('لم يتم اختيار أي إجابة');
     }
   }
-
 }

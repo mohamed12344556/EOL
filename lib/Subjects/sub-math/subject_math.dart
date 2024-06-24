@@ -1,12 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/sub-math/views/units_list_view.dart';
 import 'package:high_school/Subjects/utils/app_assets.dart';
-
 import 'package:high_school/models/subject_model.dart';
 
 class SubjectViewMath extends StatelessWidget {
   const SubjectViewMath({super.key});
+
   static const List<SubjectModel> subjects = [
     SubjectModel(title: "English", imgPath: Assets.imagesBooks),
     SubjectModel(title: "Biology", imgPath: Assets.imagesMicroscope),
@@ -124,7 +123,9 @@ class _GridItem extends StatelessWidget {
     super.key,
     required this.item,
   });
+
   final SubjectModel item;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(

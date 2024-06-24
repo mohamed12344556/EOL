@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/utils/app_assets.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
@@ -10,13 +9,12 @@ class UnitView extends StatelessWidget {
   static const List<String> unitItemTitles = [
     "Book",
     "Quiz",
-    
   ];
   static const List<IconData> unitItemIcons = [
     Icons.book,
     Icons.question_mark,
-    
   ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -80,8 +78,10 @@ class UnitView extends StatelessWidget {
 
 class CustomUnitItem extends StatelessWidget {
   const CustomUnitItem({super.key, required this.icon, required this.title});
+
   final IconData icon;
   final String title;
+
   @override
   Widget build(BuildContext context) {
     return Row(

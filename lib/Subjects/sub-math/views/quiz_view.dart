@@ -1,8 +1,5 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
-
 
 class QuizView extends StatelessWidget {
   const QuizView({super.key});

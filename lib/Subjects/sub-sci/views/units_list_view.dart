@@ -1,11 +1,12 @@
-
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/sub-sci/views/unit_view.dart';
 import 'package:high_school/models/subject_model.dart';
 
 class UnitsListView extends StatelessWidget {
   const UnitsListView({super.key, required this.item});
+
   final SubjectModel item;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -95,7 +96,9 @@ class UnitsListView extends StatelessWidget {
 
 class _UnitItem extends StatelessWidget {
   const _UnitItem({super.key, required this.index});
+
   final int index;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(

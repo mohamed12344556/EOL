@@ -1,4 +1,5 @@
-class ValueModel{
-  final String value;
- const ValueModel({required this.value});
+class ValueModel {
+  final String? value;
+
+  const ValueModel({required this.value});
 }

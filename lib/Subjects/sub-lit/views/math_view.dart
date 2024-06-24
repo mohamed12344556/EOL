@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/utils/app_assets.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
@@ -6,10 +5,11 @@ import 'package:high_school/models/subject_model.dart';
 
 class MathView extends StatelessWidget {
   const MathView({super.key});
+
   static const List<SubjectModel> subjects = [
-    SubjectModel(title: "Algebra",imgPath: Assets.imagesBooks),
+    SubjectModel(title: "Algebra", imgPath: Assets.imagesBooks),
     SubjectModel(title: "Dynamics", imgPath: Assets.imagesBooks),
-    SubjectModel(title: "Statics",imgPath: Assets.imagesBooks),
+    SubjectModel(title: "Statics", imgPath: Assets.imagesBooks),
     SubjectModel(title: "Calculus ", imgPath: Assets.imagesBooks),
     SubjectModel(title: "Integration ", imgPath: Assets.imagesBooks),
   ];
@@ -40,7 +40,7 @@ class MathView extends StatelessWidget {
                 ),
               ],
             ),
-           const SizedBox(
+            const SizedBox(
               height: 46,
             ),
             Expanded(
@@ -60,7 +60,9 @@ class MathView extends StatelessWidget {
 
 class CustomSubjectItem extends StatelessWidget {
   const CustomSubjectItem({super.key, required this.item});
+
   final SubjectModel item;
+
   @override
   Widget build(BuildContext context) {
     return Padding(

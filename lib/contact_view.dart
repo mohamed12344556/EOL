@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
 
@@ -106,8 +105,10 @@ class ContactView extends StatelessWidget {
 class CustomContactTextFormField extends StatelessWidget {
   const CustomContactTextFormField(
       {super.key, required this.hintText, this.isMessage = false});
+
   final String hintText;
   final bool isMessage;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(

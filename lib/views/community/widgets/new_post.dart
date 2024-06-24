@@ -1,7 +1,4 @@
 import 'dart:io';
-
-
-
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
 import 'package:high_school/core/localization/app_localization.dart';

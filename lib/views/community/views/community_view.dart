@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:high_school/models/post_model.dart';
 import 'package:high_school/services/dependency_injection_service.dart';

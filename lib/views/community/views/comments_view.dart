@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:high_school/core/localization/app_localization.dart';
 import 'package:high_school/core/widgets/custom_text_field.dart';

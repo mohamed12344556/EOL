@@ -73,7 +73,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "images/logo.png"
+  image_path: "assets/images/logo.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -96,7 +96,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/
+    - assets/images/
     #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -113,20 +113,20 @@ flutter:
   fonts:
     - family: Smooch-Regular
       fonts:
-        - asset: fonts/Smooch-Regular.ttf
+        - asset: assets/fonts/Smooch-Regular.ttf
           style: italic
     - family: Ephesis-Regular
       fonts:
-        - asset: fonts/Ephesis-Regular.ttf
+        - asset: assets/fonts/Ephesis-Regular.ttf
           style: italic 
     - family: Ephesis-Regular
       fonts:
-        - asset: fonts/EBGaramond-Italic-VariableFont_wght.ttf
+        - asset: assets/fonts/EBGaramond-Italic-VariableFont_wght.ttf
           style: italic
     - family: MontserratAlternates-MediumItalic
       fonts:
-        - asset: fonts/MontserratAlternates-MediumItalic.ttf
-        - asset: fonts/MontserratAlternates-MediumItalic.ttf             
+        - asset: assets/fonts/MontserratAlternates-MediumItalic.ttf
+        - asset: assets/fonts/MontserratAlternates-MediumItalic.ttf
                
   #   - family: Trajan Pro
   #     fonts:

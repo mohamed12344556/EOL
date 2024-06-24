@@ -1,5 +1,3 @@
-
-
 import 'package:get_it/get_it.dart';
 import 'package:high_school/core/local_data/shared_preferences_services.dart';
 import 'package:high_school/core/localization/app_localization.dart';

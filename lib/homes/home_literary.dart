@@ -113,7 +113,7 @@ class _HomeLiteraryState extends State<HomeLiterary> with Crud {
           height: 60,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(60),
-            child: Image.asset('images/face.PNG', fit: BoxFit.cover),
+            child: Image.asset('assets/images/face.PNG', fit: BoxFit.cover),
           ),
         ),
         const Expanded(
@@ -161,8 +161,10 @@ class _HomeLiteraryState extends State<HomeLiterary> with Crud {
                 height: 15,
               ),
               Center(
-                  child: Lottie.asset('images/Animation - 1701549531524.json',
-                      width: 200, height: 80)),
+                  child: Lottie.asset(
+                      'assets/images/Animation - 1701549531524.json',
+                      width: 200,
+                      height: 80)),
               _buildBottomRowItems(context),
             ],
           ),

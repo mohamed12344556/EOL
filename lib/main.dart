@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -19,11 +18,9 @@ import 'package:high_school/services/service_initializer.dart';
 import 'package:high_school/views/community/views/community_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 late SharedPreferences sharepref;
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   await ServiceInitializer().initializeSettings();
   sharepref = await SharedPreferences.getInstance();

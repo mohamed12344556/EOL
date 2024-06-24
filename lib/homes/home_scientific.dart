@@ -11,7 +11,6 @@ import 'package:high_school/plan/plan_note_showbottom.dart';
 import 'package:high_school/plan/planonly/staticplan.dart';
 import 'package:lottie/lottie.dart';
 
-
 // import '../staticplan.dart';
 
 class HomeScientific extends StatefulWidget {
@@ -108,7 +107,7 @@ class _HomeScientificState extends State<HomeScientific> with Crud {
           height: 60,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(60),
-            child: Image.asset('images/face.PNG', fit: BoxFit.cover),
+            child: Image.asset('assets/images/face.PNG', fit: BoxFit.cover),
           ),
         ),
         const Expanded(
@@ -158,8 +157,10 @@ class _HomeScientificState extends State<HomeScientific> with Crud {
                 height: 15,
               ),
               Center(
-                  child: Lottie.asset('images/Animation - 1701549531524.json',
-                      width: 200, height: 80)),
+                  child: Lottie.asset(
+                      'assets/images/Animation - 1701549531524.json',
+                      width: 200,
+                      height: 80)),
               _buildBottomRowItems(context),
             ],
           ),
@@ -273,8 +274,8 @@ class _HomeScientificState extends State<HomeScientific> with Crud {
             title: "Plan",
             icon: Icons.calendar_today,
             onpress: () {
-              // Navigator.of(context).push(
-              //     MaterialPageRoute(builder: (context) => const StaticPaln()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const StaticPaln()));
             },
           ),
           const SizedBox(height: 10),

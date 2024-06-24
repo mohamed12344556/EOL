@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
 import 'package:high_school/Subjects/utils/fonts.dart';
@@ -67,9 +66,9 @@ class _ChooseDepartmentState extends State<ChooseDepartment> {
                 const SizedBox(height: 20),
                 _buildDepartmentButton(
                   context,
-                  'images/microscope.png',
+                  'assets/images/microscope.png',
                   'Scientific',
-                      () {
+                  () {
                     saveDepartment("علوم");
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
@@ -81,9 +80,9 @@ class _ChooseDepartmentState extends State<ChooseDepartment> {
                 const SizedBox(height: 20),
                 _buildDepartmentButton(
                   context,
-                  'images/tools.png',
+                  'assets/images/tools.png',
                   'Mathematics',
-                      () {
+                  () {
                     saveDepartment("رياضة");
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
@@ -95,9 +94,9 @@ class _ChooseDepartmentState extends State<ChooseDepartment> {
                 const SizedBox(height: 20),
                 _buildDepartmentButton(
                   context,
-                  'images/books.png',
+                  'assets/images/books.png',
                   'Literary',
-                      () {
+                  () {
                     saveDepartment("ادبي");
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
@@ -114,7 +113,8 @@ class _ChooseDepartmentState extends State<ChooseDepartment> {
     );
   }
 
-  Widget _buildDepartmentButton(BuildContext context, String imagePath, String text, VoidCallback onPressed) {
+  Widget _buildDepartmentButton(BuildContext context, String imagePath,
+      String text, VoidCallback onPressed) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 90.0),
       child: Container(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:high_school/services/dependency_injection_service.dart';
 import 'package:high_school/utils/app_constants.dart';
+
 import '../local_data/shared_preferences_services.dart';
 
 enum LanguageType { arabic, english }
@@ -41,7 +42,7 @@ class AppLocalizations implements BaseAppLocalizations {
       ? LanguageType.arabic.getLanguageValue()
       : LanguageType.english.getLanguageValue();
   static String currentSelectedLanguage =
-  LanguageType.english.getLanguageValue();
+      LanguageType.english.getLanguageValue();
 
   /// Change language for the current application
   /// Save current application language in device local storage so that even if app terminated/restarted, the language doesn't change
@@ -49,8 +50,8 @@ class AppLocalizations implements BaseAppLocalizations {
   changeLocale({String? languageCode}) {
     languageCode == null
         ? Get.updateLocale(isArabic()
-        ? Locale(LanguageType.english.getLanguageValue())
-        : Locale(LanguageType.arabic.getLanguageValue()))
+            ? Locale(LanguageType.english.getLanguageValue())
+            : Locale(LanguageType.arabic.getLanguageValue()))
         : Get.updateLocale(Locale(languageCode));
     setUserStoredLocale(Get.locale!);
   }
@@ -80,7 +81,7 @@ class AppLocalizations implements BaseAppLocalizations {
   @override
   Future<Locale> getUserStoredLocale() async {
     String locale = await sl<SharedPreferencesServices>().getData(
-        key: AppConstants.userStoredLocale, dataType: DataType.string) ??
+            key: AppConstants.userStoredLocale, dataType: DataType.string) ??
         defaultLocal;
     if (locale.contains(LanguageType.english.getLanguageValue())) {
       return Locale(LanguageType.english.getLanguageValue());

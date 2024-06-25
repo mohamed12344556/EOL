@@ -1,29 +1,59 @@
-
+import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:high_school/Subjects/sub-lit/subject_lit.dart';
-import 'package:high_school/Subjects/sub-math/subject_math.dart';
-import 'package:high_school/Subjects/sub-sci/subject_scie.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
 import 'package:high_school/Subjects/utils/fonts.dart';
-
+import 'package:high_school/componet/crud.dart';
+import 'package:high_school/constant/link.dart';
+import 'package:high_school/homes/home_literary.dart';
+import 'package:high_school/homes/home_mathematics.dart';
+import 'package:high_school/homes/home_scientific.dart';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChooseDepartment extends StatefulWidget {
-  const ChooseDepartment({Key? key}) : super(key: key);
+  const ChooseDepartment({super.key});
 
   @override
   State<ChooseDepartment> createState() => _ChooseDepartmentState();
 }
 
-class _ChooseDepartmentState extends State<ChooseDepartment> {
+class _ChooseDepartmentState extends State<ChooseDepartment> with Crud {
+  List<Map<String, dynamic>> departments = [];
+
   @override
   void initState() {
     super.initState();
+    _fetchDepartments();
   }
 
-  void saveDepartment(String department) async {
+  _fetchDepartments() async {
+    try {
+      const url = linkDepartment;
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        setState(() {
+          var responseData = json.decode(response.body);
+          if (responseData['status'] == 'success') {
+            departments = List<Map<String, dynamic>>.from(responseData['data']);
+            log('Departments List: $departments');
+          } else {
+            throw Exception('Failed to load departments');
+          }
+        });
+      } else {
+        throw Exception('Failed to load departments');
+      }
+    } catch (e) {
+      log('Error: $e');
+      throw Exception('Failed to load departments (Exception: $e)');
+    }
+  }
+
+  void saveDepartment(int departmentId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('department', department);
+    await prefs.setInt('departmentId', departmentId);
   }
 
   @override
@@ -31,27 +61,18 @@ class _ChooseDepartmentState extends State<ChooseDepartment> {
     return Scaffold(
       backgroundColor: AppColors.bluelight,
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.white,
-            size: 25,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
         backgroundColor: AppColors.bluelight,
         elevation: 0,
         centerTitle: true,
         title: const Text(
           'EOL',
           style: TextStyle(
-              color: Colors.white,
-              fontSize: 70,
-              letterSpacing: 3,
-              fontWeight: FontWeight.bold,
-              fontFamily: Appfonts.fontfamilymont),
+            color: Colors.white,
+            fontSize: 70,
+            letterSpacing: 3,
+            fontWeight: FontWeight.bold,
+            fontFamily: Appfonts.fontfamilymont,
+          ),
         ),
       ),
       body: SafeArea(
@@ -64,69 +85,49 @@ class _ChooseDepartmentState extends State<ChooseDepartment> {
               borderRadius: BorderRadius.circular(20),
             ),
             width: 450,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const Center(
-                  child: Text(
-                    'Choose your department',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontFamily: Appfonts.fontfamilymont),
+            child: departments.isEmpty
+                ? const Center(child: CircularProgressIndicator())
+                : Column(
+                    children: [
+                      const Center(
+                        child: Text(
+                          'Choose your department',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontFamily: Appfonts.fontfamilymont,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      ...departments.map((department) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          child: _buildDepartmentButton(
+                            context,
+                            _getDepartmentIcon(department['departments_id']),
+                            department['departments_name'],
+                            () {
+                              saveDepartment(department['departments_id']);
+                              _navigateToHome(department['departments_id']);
+                            },
+                          ),
+                        );
+                      }).toList(),
+                    ],
                   ),
-                ),
-                const SizedBox(height: 20),
-                _buildDepartmentButton(
-                  context,
-                  'assets/images/microscope.png',
-                  'Scientific',
-                      () {
-                    saveDepartment("علوم");
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => SubjectViewsci(),
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 20),
-                _buildDepartmentButton(
-                  context,
-                  'assets/images/tools.png',
-                  'Mathematics',
-                      () {
-                    saveDepartment("رياضة");
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => SubjectViewMath(),
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 20),
-                _buildDepartmentButton(
-                  context,
-                  'assets/images/books.png',
-                  'Literary',
-                      () {
-                    saveDepartment("ادبي");
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => SubjectViewlit(),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildDepartmentButton(BuildContext context, String imagePath, String text, VoidCallback onPressed) {
+  Widget _buildDepartmentButton(
+    BuildContext context,
+    String imagePath,
+    String text,
+    VoidCallback onPressed,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 90.0),
       child: Container(
@@ -144,18 +145,56 @@ class _ChooseDepartmentState extends State<ChooseDepartment> {
             children: [
               Image.asset(
                 imagePath,
-                height: 90,
+                height: 80,
               ),
               Text(
                 text,
                 style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  String _getDepartmentIcon(int departmentId) {
+    switch (departmentId) {
+      case 1:
+        return 'assets/images/microscope.png';
+      case 2:
+        return 'assets/images/tools.png';
+      case 3:
+        return 'assets/images/books.png';
+      default:
+        return 'assets/images/default.png'; // Default icon if department ID does not match
+    }
+  }
+
+  void _navigateToHome(int departmentId) {
+    Widget homeWidget;
+    switch (departmentId) {
+      case 1:
+        homeWidget = HomeScientific(departmentId: departmentId);
+        break;
+      case 2:
+        homeWidget = HomeMathematics(departmentId: departmentId);
+        break;
+      case 3:
+        homeWidget = HomeLiterary(departmentId: departmentId);
+        break;
+      default:
+        homeWidget = HomeScientific(
+            departmentId:
+                departmentId); // Default home widget if department ID does not match
+    }
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => homeWidget,
       ),
     );
   }

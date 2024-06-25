@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:high_school/account-1/profile_edite.dart';
+import 'package:high_school/utils/app_colors.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class account extends StatefulWidget {
   const account({super.key});
@@ -10,6 +12,23 @@ class account extends StatefulWidget {
 }
 
 class _accountState extends State<account> {
+  String currentUserEmail = "";
+  String userName = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserDetails();
+  }
+
+  Future<void> _loadUserDetails() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('username') ?? 'User';
+      currentUserEmail = prefs.getString('email') ?? 'Email';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // var isDark =MediaQuery.of(context).platformBrightness==Brightness.dark;
@@ -44,7 +63,7 @@ class _accountState extends State<account> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: Image.asset(
-                          'images/face.PNG',
+                          'assets/images/face.PNG',
                           fit: BoxFit.cover,
                         ),
                       )),
@@ -56,7 +75,7 @@ class _accountState extends State<account> {
                         height: 35,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
-                          color: Color.fromARGB(255, 20, 94, 1),
+                          color: AppColors.yellow,
                         ),
                         child: const Icon(
                           LineAwesomeIcons.alternate_pencil,
@@ -71,9 +90,9 @@ class _accountState extends State<account> {
                 height: 15,
               ),
 
-              Text("ibrahim"),
+              Text(userName),
               Text(
-                "ibrahimmahmed@gmail.com",
+                currentUserEmail,
                 maxLines: 1,
                 style: TextStyle(fontSize: 13),
               ),
@@ -92,7 +111,7 @@ class _accountState extends State<account> {
                       style: TextStyle(color: Colors.white),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 20, 94, 1),
+                      backgroundColor: AppColors.yellow,
                       side: BorderSide.none,
                       shape: const StadiumBorder(),
                     ),

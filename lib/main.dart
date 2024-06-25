@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         translations: LanguageTranslation(),
         initialRoute:
             sharepref.getString("id") == null ? "login" : "splach",
-        // home: splashscreen(),
+        // home: Login(),
         routes: {
           "addnote": (context) => const AddNote(),
           "editenote": (context) => const EditNote(),

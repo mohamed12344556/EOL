@@ -1,24 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/sub-lit/subject_lit.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
+import 'package:high_school/Subjects/utils/fonts.dart';
 import 'package:high_school/account-1/account.dart';
 import 'package:high_school/componet/crud.dart';
 import 'package:high_school/constant/link.dart';
 import 'package:high_school/contact_view.dart';
-import 'package:high_school/departement/choose_department.dart';
 import 'package:high_school/login/sign/login.dart';
 import 'package:high_school/main.dart';
+import 'package:high_school/models/subject_model.dart';
+import 'package:high_school/plan/cardnote.dart';
+import 'package:high_school/plan/note/editenote.dart';
 import 'package:high_school/plan/plan_note_showbottom.dart';
 import 'package:high_school/plan/planonly/staticplan.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeLiterary extends StatefulWidget {
+  final int? departmentId;
+
+  const HomeLiterary({super.key, this.departmentId});
+
   @override
   State<HomeLiterary> createState() => _HomeLiteraryState();
 }
 
 class _HomeLiteraryState extends State<HomeLiterary> with Crud {
+  String currentUserEmail = "";
+  String userName = "";
+
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+  List<SubjectModel> subjects = [];
+
+  Future<List<SubjectModel>> getSubjects() async {
+    var response = await postRequest(linkSubject, {
+      "departmentid": widget.departmentId.toString(),
+    });
+
+    if (response['status'] == 'success') {
+      List subjectsData = response['data'];
+      subjects = subjectsData.map((data) {
+        return SubjectModel(
+          subjectName: data['subjects_name'],
+          subjectImg: data['subjects_image'],
+          subjectsId: data['subjects_id'],
+          departmentsId: data['departments_id'],
+          departmentsName: data['departments_name'],
+          subjectsDepartmentsId: data['subjects_departments'],
+        );
+      }).toList();
+      return subjects;
+    } else {
+      throw Exception('Failed to load subjects');
+    }
+  }
 
   _HomeLiteraryState();
 
@@ -27,6 +62,21 @@ class _HomeLiteraryState extends State<HomeLiterary> with Crud {
       "id": sharepref.getString("id"),
     });
     return response;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getSubjects();
+    _loadUserDetails();
+  }
+
+  Future<void> _loadUserDetails() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('username') ?? 'User';
+      currentUserEmail = prefs.getString('email') ?? 'Email';
+    });
   }
 
   @override
@@ -52,7 +102,7 @@ class _HomeLiteraryState extends State<HomeLiterary> with Crud {
           fontSize: 30,
           letterSpacing: 3,
           fontWeight: FontWeight.bold,
-          fontFamily: 'Smooch-Regular',
+          fontFamily: Appfonts.fontfamilymont,
         ),
       ),
       actions: const [
@@ -117,11 +167,11 @@ class _HomeLiteraryState extends State<HomeLiterary> with Crud {
             child: Image.asset('assets/images/face.PNG', fit: BoxFit.cover),
           ),
         ),
-        const Expanded(
+        Expanded(
           child: ListTile(
-            title: Text("ibrahim"),
+            title: Text(userName),
             subtitle: Text(
-              "ibrahimmahmed@gmail.com",
+              currentUserEmail,
               maxLines: 1,
               style: TextStyle(fontSize: 13),
             ),
@@ -162,10 +212,8 @@ class _HomeLiteraryState extends State<HomeLiterary> with Crud {
                 height: 15,
               ),
               Center(
-                  child: Lottie.asset(
-                      'assets/images/Animation - 1701549531524.json',
-                      width: 200,
-                      height: 80)),
+                  child: Lottie.asset('assets/images/Animation - 1701549531524.json',
+                      width: 200, height: 80)),
               _buildBottomRowItems(context),
             ],
           ),
@@ -183,7 +231,9 @@ class _HomeLiteraryState extends State<HomeLiterary> with Crud {
             title: "Subject",
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const ChooseDepartment()));
+                  builder: (context) => SubjectViewlit(
+                        subjects: subjects,
+                      )));
             },
           ),
         ),
@@ -241,17 +291,25 @@ class _HomeLiteraryState extends State<HomeLiterary> with Crud {
           duration: const Duration(milliseconds: 200),
           height: isHovered ? 160 : 140,
           decoration: BoxDecoration(
-            color: AppColors.blue,
-            borderRadius: BorderRadius.circular(15),
-          ),
+              color: Colors.white,
+              boxShadow: [
+                const BoxShadow(
+                  color: Colors.black45,
+                  blurRadius: 12,
+                  spreadRadius: 2,
+                  offset: Offset(8, 8),
+                ),
+              ],
+              borderRadius: BorderRadius.circular(20)),
           width: 120,
           child: Center(
             child: Text(
               title,
               style: const TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: 17,
+                fontFamily: Appfonts.fontfamilymont,
               ),
             ),
           ),
@@ -285,20 +343,53 @@ class _HomeLiteraryState extends State<HomeLiterary> with Crud {
             },
           ),
           const SizedBox(height: 5),
-          Container(
-            height: 150,
-            width: 300,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Color(0xFF102C57)),
-            child: MaterialButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed("Ur_Notes");
+          Expanded(
+            child: FutureBuilder(
+              future: getNote(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (snapshot.hasData) {
+                  if (snapshot.data['status'] == 'fail' ||
+                      snapshot.data['data'] == null) {
+                    return const Center(
+                      child: Text(
+                        "There are no notes",
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      ),
+                    );
+                  }
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: snapshot.data['data']?.length ?? 0,
+                    itemBuilder: (context, i) {
+                      return Container(
+                        width: 200, // Adjust width as needed
+                        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: cardnote(
+                          ontap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => EditNote(
+                                notes: snapshot.data['data'][i],
+                              ),
+                            ));
+                          },
+                          title: "${snapshot.data['data'][i]['notes_title']}",
+                          content:
+                              "${snapshot.data['data'][i]['notes_content']}",
+                        ),
+                      );
+                    },
+                  );
+                }
+                return const Center(
+                  child: Text("Loading . . ."),
+                );
               },
-              child: Text(
-                "My notes",
-                style: TextStyle(color: Colors.white, fontSize: 40),
-              ),
             ),
           ),
         ],

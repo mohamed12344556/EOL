@@ -1,39 +1,17 @@
 class SubjectModel {
-  final int? id;
-  final String? title;
-  final String? imgPath;
+  final String subjectName;
+  final String subjectImg;
+  final int subjectsId;
+  final int subjectsDepartmentsId;
+  final int departmentsId;
+  final String departmentsName;
 
-  SubjectModel({
-    this.id,
-    this.title,
-    this.imgPath,
+  const SubjectModel({
+    required this.subjectName,
+    required this.subjectImg,
+    required this.subjectsId,
+    required this.subjectsDepartmentsId,
+    required this.departmentsId,
+    required this.departmentsName,
   });
-
-  factory SubjectModel.fromMap(Map<String, dynamic> json) {
-    return SubjectModel(
-      id: json['subjects_id'],
-      title: json['subjects_name'],
-      imgPath: json['subjects_image'],
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'subjects_id': id,
-      'subjects_name': title,
-      'subjects_image': imgPath,
-    };
-  }
-
-  SubjectModel copyWith({
-    int? id,
-    String? title,
-    String? imgPath,
-  }) {
-    return SubjectModel(
-      id: id ?? this.id,
-      title: title ?? this.title,
-      imgPath: imgPath ?? this.imgPath,
-    );
-  }
 }

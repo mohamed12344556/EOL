@@ -1,30 +1,82 @@
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/sub-sci/subject_scie.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
+import 'package:high_school/Subjects/utils/fonts.dart';
 import 'package:high_school/account-1/account.dart';
 import 'package:high_school/componet/crud.dart';
 import 'package:high_school/constant/link.dart';
 import 'package:high_school/contact_view.dart';
-import 'package:high_school/departement/choose_department.dart';
 import 'package:high_school/login/sign/login.dart';
 import 'package:high_school/main.dart';
+import 'package:high_school/models/subject_model.dart';
+import 'package:high_school/plan/cardnote.dart';
+import 'package:high_school/plan/note/editenote.dart';
 import 'package:high_school/plan/plan_note_showbottom.dart';
 import 'package:high_school/plan/planonly/staticplan.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+// import '../staticplan.dart';
 
 class HomeScientific extends StatefulWidget {
+  final int? departmentId;
+
+  const HomeScientific({super.key, this.departmentId});
+
   @override
   State<HomeScientific> createState() => _HomeScientificState();
 }
 
 class _HomeScientificState extends State<HomeScientific> with Crud {
+  String currentUserEmail = "";
+  String userName = "";
+
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+  List<SubjectModel> subjects = [];
 
   getNote() async {
     var response = await postRequest(linkViewNote, {
       "id": sharepref.getString("id"),
     });
     return response;
+  }
+
+  Future<List<SubjectModel>> getSubjects() async {
+    var response = await postRequest(linkSubject, {
+      "departmentid": widget.departmentId.toString(),
+    });
+
+    if (response['status'] == 'success') {
+      List subjectsData = response['data'];
+      subjects = subjectsData.map((data) {
+        return SubjectModel(
+          subjectName: data['subjects_name'],
+          subjectImg: data['subjects_image'],
+          subjectsId: data['subjects_id'],
+          departmentsId: data['departments_id'],
+          departmentsName: data['departments_name'],
+          subjectsDepartmentsId: data['subjects_departments'],
+        );
+      }).toList();
+      return subjects;
+    } else {
+      throw Exception('Failed to load subjects');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getSubjects();
+    _loadUserDetails();
+  }
+
+  Future<void> _loadUserDetails() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('username') ?? 'User';
+      currentUserEmail = prefs.getString('email') ?? 'Email';
+    });
   }
 
   @override
@@ -50,9 +102,15 @@ class _HomeScientificState extends State<HomeScientific> with Crud {
           fontSize: 30,
           letterSpacing: 3,
           fontWeight: FontWeight.bold,
-          fontFamily: "MontserratAlternates-MediumItalic",
+          fontFamily: Appfonts.fontfamilymont,
         ),
       ),
+      actions: const [
+        Padding(
+          padding: EdgeInsets.all(15.0),
+          child: Icon(Icons.search),
+        ),
+      ],
     );
   }
 
@@ -109,15 +167,13 @@ class _HomeScientificState extends State<HomeScientific> with Crud {
             child: Image.asset('assets/images/face.PNG', fit: BoxFit.cover),
           ),
         ),
-        const Expanded(
+        Expanded(
           child: ListTile(
-            title: Text("ibrahim"),
+            title: Text(userName),
             subtitle: Text(
-              "ibrahimmahmed@gmail.com",
+              currentUserEmail,
               maxLines: 1,
-              style: TextStyle(
-                fontSize: 13,
-              ),
+              style: TextStyle(fontSize: 13),
             ),
           ),
         ),
@@ -177,7 +233,10 @@ class _HomeScientificState extends State<HomeScientific> with Crud {
             title: "Subject",
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const ChooseDepartment()));
+                  builder: (context) => SubjectViewsci(
+                        subjects: subjects,
+                      ))
+              );
             },
           ),
         ),
@@ -237,7 +296,7 @@ class _HomeScientificState extends State<HomeScientific> with Crud {
           decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
-                BoxShadow(
+                const BoxShadow(
                   color: Colors.black45,
                   blurRadius: 12,
                   spreadRadius: 2,
@@ -250,10 +309,11 @@ class _HomeScientificState extends State<HomeScientific> with Crud {
             child: Text(
               title,
               style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                  fontFamily: "MontserratAlternates-MediumItalic"),
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
+                fontFamily: Appfonts.fontfamilymont,
+              ),
             ),
           ),
         ),

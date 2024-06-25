@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:high_school/Subjects/utils/app_assets.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
 import 'package:high_school/models/subject_model.dart';
 
 class MathView extends StatelessWidget {
   const MathView({super.key});
 
-  static List<SubjectModel> subjects = [
-    SubjectModel(title: "Algebra", imgPath: Assets.imagesBooks),
-    SubjectModel(title: "Dynamics", imgPath: Assets.imagesBooks),
-    SubjectModel(title: "Statics", imgPath: Assets.imagesBooks),
-    SubjectModel(title: "Calculus ", imgPath: Assets.imagesBooks),
-    SubjectModel(title: "Integration ", imgPath: Assets.imagesBooks),
+  static const List<SubjectModel> subjects = [
+    // SubjectModel(subjectName: "Algebra", subjectImg: Assets.imagesBooks),
+    // SubjectModel(subjectName: "Dynamics", subjectImg: Assets.imagesBooks),
+    // SubjectModel(subjectName: "Statics", subjectImg: Assets.imagesBooks),
+    // SubjectModel(subjectName: "Calculus ", subjectImg: Assets.imagesBooks),
+    // SubjectModel(subjectName: "Integration ", subjectImg: Assets.imagesBooks),
   ];
 
   @override
@@ -78,12 +77,12 @@ class CustomSubjectItem extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(item.imgPath!),
+              Image.asset(item.subjectImg),
               SizedBox(
                 width: 10,
               ),
               Text(
-                item.title!,
+                item.subjectName,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,

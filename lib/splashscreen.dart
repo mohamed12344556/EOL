@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:high_school/homes/home_scientific.dart';
 import 'package:lottie/lottie.dart';
 
+import 'departement/choose_department.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -26,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => HomeScientific(),
+        builder: (context) => ChooseDepartment(),
       ),
     );
   }

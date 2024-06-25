@@ -1,11 +1,51 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/sub-lit/views/unit_view.dart';
+import 'package:high_school/Subjects/sub-sci/views/units_list_view.dart';
+import 'package:high_school/Subjects/utils/app_colors.dart';
 import 'package:high_school/models/subject_model.dart';
+import 'package:http/http.dart' as http;
 
-class UnitsListView extends StatelessWidget {
+import '../../../constant/link.dart';
+
+class UnitsListView extends StatefulWidget {
   const UnitsListView({super.key, required this.item});
 
   final SubjectModel item;
+
+  @override
+  State<UnitsListView> createState() => _UnitsListViewState();
+}
+
+class _UnitsListViewState extends State<UnitsListView> {
+  late Future<List<UnitModel>> futureUnits;
+
+  Future<List<UnitModel>> fetchUnits() async {
+    final response = await http.post(
+      Uri.parse(linkUnits),
+      body: {
+        'subjectid': widget.item.subjectsId.toString(),
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+      if (jsonResponse['status'] == 'success') {
+        List<dynamic> unitsJson = jsonResponse['data'];
+        return unitsJson.map((json) => UnitModel.fromJson(json)).toList();
+      } else {
+        throw Exception('Failed to load units');
+      }
+    } else {
+      throw Exception('Failed to load units');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    futureUnits = fetchUnits();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +65,8 @@ class UnitsListView extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               gradient: LinearGradient(
                 colors: [
-                  Color.fromARGB(255, 238, 74, 74),
-                  Color.fromARGB(255, 219, 204, 73)
+                  AppColors.bluelight,
+                  AppColors.blue,
                 ],
                 begin: AlignmentDirectional.topCenter,
                 end: AlignmentDirectional.bottomCenter,
@@ -53,17 +93,20 @@ class UnitsListView extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      item.title!,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                    Flexible(
+                      child: FittedBox(
+                        child: Text(
+                          widget.item.subjectName,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
-                Spacer(),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
@@ -79,15 +122,31 @@ class UnitsListView extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: ListView.separated(
-            physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.all(20),
-            itemCount: 12,
-            itemBuilder: (context, index) => _UnitItem(index: index + 1),
-            separatorBuilder: (context, index) => SizedBox(
-              height: 12,
+            child: FutureBuilder<List<UnitModel>>(
+              future: futureUnits,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return Center(child: Text('No units found'));
+                } else {
+                  final units = snapshot.data!;
+                  return ListView.separated(
+                    physics: BouncingScrollPhysics(),
+                    padding: EdgeInsets.all(20),
+                    itemCount: units.length,
+                    itemBuilder: (context, index) {
+                      final unit = units[index];
+                      return _UnitItem(index: unit.id, name: unit.name);
+                    },
+                    separatorBuilder: (context, index) => SizedBox(height: 12),
+                  );
+                }
+              },
             ),
-          ))
+          ),
         ],
       ),
     ));
@@ -95,9 +154,10 @@ class UnitsListView extends StatelessWidget {
 }
 
 class _UnitItem extends StatelessWidget {
-  const _UnitItem({super.key, required this.index});
+  const _UnitItem({super.key, required this.index, required this.name});
 
   final int index;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -121,14 +181,16 @@ class _UnitItem extends StatelessWidget {
             )),
         child: Row(
           children: [
-            Text(
-              "Unit-$index :",
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
+            Expanded(
+              child: Text(
+                "Unit-$index : $name",
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            Spacer(),
+            // Spacer(),
             Text(
               "0/100",
               style: TextStyle(

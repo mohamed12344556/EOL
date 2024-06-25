@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:high_school/account-1/account.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+
+import 'account.dart';
 
 class profile_edite extends StatefulWidget {
   const profile_edite({super.key});
@@ -42,7 +43,7 @@ class _profile_editeState extends State<profile_edite> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: Image.asset(
-                          'images/face.PNG',
+                          'assets/images/face.PNG',
                           fit: BoxFit.cover,
                         ),
                       )),

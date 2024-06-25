@@ -1,19 +1,19 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:high_school/Subjects/sub-lit/subject_lit.dart';
 import 'package:high_school/Subjects/sub-lit/views/units_list_view.dart';
-import 'package:high_school/Subjects/utils/app_assets.dart';
+import 'package:high_school/Subjects/utils/app_colors.dart';
+import 'package:high_school/constant/link.dart';
 import 'package:high_school/models/subject_model.dart';
 
-class SubjectViewsci extends StatelessWidget {
-  const SubjectViewsci({super.key});
 
-  static List<SubjectModel> subjects = [
-    SubjectModel(title: "English", imgPath: Assets.imagesBooks),
-    SubjectModel(title: "Biology", imgPath: Assets.imagesMicroscope),
-    SubjectModel(title: "Mathematics", imgPath: Assets.imagesTools),
-    SubjectModel(title: "Arabic", imgPath: Assets.imagesContract),
-    SubjectModel(title: "Physics", imgPath: Assets.imagesElectricity),
-    SubjectModel(title: "Chemistry", imgPath: Assets.imagesChemistry),
-  ];
+
+class SubjectViewsci extends StatelessWidget {
+  final List<SubjectModel> subjects;
+
+  const SubjectViewsci({super.key, required this.subjects});
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +36,8 @@ class SubjectViewsci extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   gradient: LinearGradient(
                     colors: [
-                      Color.fromARGB(255, 238, 74, 74),
-                      Color.fromARGB(255, 219, 204, 73)
+                      AppColors.bluelight,
+                      AppColors.blue,
                     ],
                     begin: AlignmentDirectional.topCenter,
                     end: AlignmentDirectional.bottomCenter,
@@ -130,12 +130,16 @@ class _GridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String encodedFileName = encodeFileName(item.subjectImg);
+
     return InkWell(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => UnitsListView(item: item),
+            builder: (context) => UnitsListView(
+              item: item,
+            ),
           ),
         );
       },
@@ -156,16 +160,24 @@ class _GridItem extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: Image.asset(
-                item.imgPath!,
-                fit: BoxFit.fill,
+              child: Image.network(
+                '$linkServerName/upload/$encodedFileName',
+                errorBuilder: (BuildContext context, Object exception,
+                    StackTrace? stackTrace) {
+                  return Image.asset('assets/images/books.png');
+                },
               ),
+              // child: Image.network(
+              //   "https:${item.subjectImg}",
+              //   // item.imgPath,
+              //   fit: BoxFit.fill,
+              // ),
             ),
             SizedBox(
               height: 12,
             ),
             Text(
-              item.title!,
+              item.subjectName,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

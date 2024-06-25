@@ -56,6 +56,16 @@ class _ChoicePlanState extends State<ChoicePlan> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.black,
+            size: 25,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: const Text(
           ' اختار خطتك',
           style: TextStyle(fontSize: 45, fontFamily: Appfonts.fontfamilymont),

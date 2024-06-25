@@ -273,7 +273,7 @@ class _HomeLiteraryState extends State<HomeLiterary> with Crud {
             icon: Icons.calendar_today,
             onpress: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const StaticPaln()));
+                  MaterialPageRoute(builder: (context) => const StaticPlan()));
             },
           ),
           const SizedBox(height: 10),

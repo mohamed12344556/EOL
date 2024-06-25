@@ -125,6 +125,16 @@ class _ChatPage2State extends State<ChatPage2> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.black,
+            size: 25,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: const Text(
           "Chat",
           style: TextStyle(fontWeight: FontWeight.bold),

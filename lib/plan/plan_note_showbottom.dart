@@ -27,7 +27,7 @@ class plan_note extends StatelessWidget {
         ),
         child: Icon(
           icon,
-          size: 35,
+          size: 25,
         ),
       ),
       title: Text(

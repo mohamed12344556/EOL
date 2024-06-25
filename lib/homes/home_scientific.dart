@@ -12,8 +12,6 @@ import 'package:high_school/plan/plan_note_showbottom.dart';
 import 'package:high_school/plan/planonly/staticplan.dart';
 import 'package:lottie/lottie.dart';
 
-// import '../staticplan.dart';
-
 class HomeScientific extends StatefulWidget {
   @override
   State<HomeScientific> createState() => _HomeScientificState();
@@ -276,7 +274,7 @@ class _HomeScientificState extends State<HomeScientific> with Crud {
             icon: Icons.calendar_today,
             onpress: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const StaticPaln()));
+                  MaterialPageRoute(builder: (context) => const StaticPlan()));
             },
           ),
           const SizedBox(height: 10),

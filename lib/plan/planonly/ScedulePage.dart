@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SchedulePage extends StatefulWidget {
   final int planNumber;
@@ -28,7 +29,6 @@ class SchedulePage extends StatefulWidget {
 }
 
 class _SchedulePageState extends State<SchedulePage> {
-  // static List<Map<String, dynamic>> scheduleData = [];
   bool isLoading = true;
   String error = '';
 
@@ -56,6 +56,7 @@ class _SchedulePageState extends State<SchedulePage> {
               List<Map<String, dynamic>>.from(responseData['data']);
           isLoading = false;
         });
+        saveScheduleData(responseData['data']);
       } else {
         print('Failed to load schedule data: ${response.body}');
         setState(() {
@@ -72,10 +73,25 @@ class _SchedulePageState extends State<SchedulePage> {
     }
   }
 
+  void saveScheduleData(List<dynamic> data) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('scheduleData', jsonEncode(data));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.white,
+            size: 25,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: const Text(
           'جدول دراسي',
           style: TextStyle(
@@ -87,25 +103,44 @@ class _SchedulePageState extends State<SchedulePage> {
         backgroundColor: AppColors.blue,
         centerTitle: true,
       ),
-      backgroundColor: AppColors.blue,
+      backgroundColor: AppColors.bluelight,
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : error.isNotEmpty
-              ? Center(child: Text(error))
+              ? Center(
+                  child: Text(
+                    error,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
               : Padding(
-                  padding: const EdgeInsets.only(top: 50),
+                  padding: const EdgeInsets.all(20.0),
                   child: Container(
-                    padding: const EdgeInsets.all(20),
-                    color: const Color.fromARGB(255, 58, 132, 243),
+                    height: 565,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 5.0,
+                          spreadRadius: 5.0,
+                          offset: Offset(0, 5),
+                        ),
+                      ],
+                    ),
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: DataTable(
-                        columnSpacing: 16.0,
+                        columnSpacing: 40.0,
+                        dataRowHeight: 70,
                         columns: const [
                           DataColumn(
-                              label: SizedBox(
-                            width: 120,
-                            child: Text(
+                            label: Text(
                               'الوقت/اليوم',
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
@@ -114,11 +149,9 @@ class _SchedulePageState extends State<SchedulePage> {
                                 fontSize: 16.0,
                               ),
                             ),
-                          )),
+                          ),
                           DataColumn(
-                              label: SizedBox(
-                            width: 120,
-                            child: Text(
+                            label: Text(
                               'الى : من',
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
@@ -127,11 +160,9 @@ class _SchedulePageState extends State<SchedulePage> {
                                 fontSize: 16.0,
                               ),
                             ),
-                          )),
+                          ),
                           DataColumn(
-                              label: SizedBox(
-                            width: 120,
-                            child: Text(
+                            label: Text(
                               'المادة 1',
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
@@ -140,11 +171,9 @@ class _SchedulePageState extends State<SchedulePage> {
                                 fontSize: 16.0,
                               ),
                             ),
-                          )),
+                          ),
                           DataColumn(
-                              label: SizedBox(
-                            width: 120,
-                            child: Text(
+                            label: Text(
                               'الى : من',
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
@@ -153,11 +182,9 @@ class _SchedulePageState extends State<SchedulePage> {
                                 fontSize: 16.0,
                               ),
                             ),
-                          )),
+                          ),
                           DataColumn(
-                              label: SizedBox(
-                            width: 120,
-                            child: Text(
+                            label: Text(
                               'المادة 2',
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
@@ -166,11 +193,9 @@ class _SchedulePageState extends State<SchedulePage> {
                                 fontSize: 16.0,
                               ),
                             ),
-                          )),
+                          ),
                           DataColumn(
-                              label: SizedBox(
-                            width: 120,
-                            child: Text(
+                            label: Text(
                               'الى : من',
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
@@ -179,11 +204,9 @@ class _SchedulePageState extends State<SchedulePage> {
                                 fontSize: 16.0,
                               ),
                             ),
-                          )),
+                          ),
                           DataColumn(
-                              label: SizedBox(
-                            width: 120,
-                            child: Text(
+                            label: Text(
                               'المادة 3',
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
@@ -192,11 +215,9 @@ class _SchedulePageState extends State<SchedulePage> {
                                 fontSize: 16.0,
                               ),
                             ),
-                          )),
+                          ),
                           DataColumn(
-                              label: SizedBox(
-                            width: 120,
-                            child: Text(
+                            label: Text(
                               'الى : من',
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
@@ -205,11 +226,9 @@ class _SchedulePageState extends State<SchedulePage> {
                                 fontSize: 16.0,
                               ),
                             ),
-                          )),
+                          ),
                           DataColumn(
-                              label: SizedBox(
-                            width: 120,
-                            child: Text(
+                            label: Text(
                               'المادة 4',
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
@@ -218,100 +237,166 @@ class _SchedulePageState extends State<SchedulePage> {
                                 fontSize: 16.0,
                               ),
                             ),
-                          )),
+                          ),
                         ],
                         rows: SchedulePage.scheduleData.map((data) {
                           return DataRow(cells: [
-                            DataCell(Container(
-                                child: Center(child: Text(data['plans_day'])))),
-                            DataCell(Container(
-                                margin: EdgeInsets.all(5),
+                            DataCell(
+                              Container(
                                 padding: EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 116, 200, 240),
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                height: 50.0,
-                                width: 120,
-                                child:
-                                    Center(child: Text(data['plans_time_1'])))),
-                            DataCell(Container(
-                                margin: EdgeInsets.all(5),
-                                padding: EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 116, 200, 240),
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                height: 50.0,
-                                width: 120,
                                 child: Center(
-                                    child: Text(data['plans_subject_1'])))),
-                            DataCell(Container(
-                                margin: EdgeInsets.all(5),
-                                padding: EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 116, 200, 240),
-                                  borderRadius: BorderRadius.circular(20.0),
+                                  child: Text(
+                                    data['plans_day'],
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ),
-                                height: 50.0,
-                                width: 120,
-                                child:
-                                    Center(child: Text(data['plans_time_2'])))),
-                            DataCell(Container(
-                                margin: EdgeInsets.all(5),
-                                padding: EdgeInsets.all(8.0),
+                              ),
+                            ),
+                            DataCell(
+                              Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(10.0),
                                 decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 116, 200, 240),
-                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: AppColors.bluelight.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(10.0),
                                 ),
-                                height: 50.0,
-                                width: 120,
                                 child: Center(
-                                    child: Text(data['plans_subject_2'])))),
-                            DataCell(Container(
-                                margin: EdgeInsets.all(5),
-                                padding: EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 116, 200, 240),
-                                  borderRadius: BorderRadius.circular(20.0),
+                                  child: Text(
+                                    data['plans_time_1'],
+                                    style: TextStyle(
+                                        fontSize: 16.0, color: Colors.white),
+                                  ),
                                 ),
-                                height: 50.0,
-                                width: 120,
-                                child:
-                                    Center(child: Text(data['plans_time_3'])))),
-                            DataCell(Container(
-                                margin: EdgeInsets.all(5),
-                                padding: EdgeInsets.all(8.0),
+                              ),
+                            ),
+                            DataCell(
+                              Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(10.0),
                                 decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 116, 200, 240),
-                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: AppColors.bluelight.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(10.0),
                                 ),
-                                height: 50.0,
-                                width: 120,
                                 child: Center(
-                                    child: Text(data['plans_subject_3'])))),
-                            DataCell(Container(
-                                margin: EdgeInsets.all(5),
-                                padding: EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 116, 200, 240),
-                                  borderRadius: BorderRadius.circular(20.0),
+                                  child: Text(
+                                    data['plans_subject_1'],
+                                    style: TextStyle(
+                                        fontSize: 16.0, color: Colors.white),
+                                  ),
                                 ),
-                                height: 50.0,
-                                width: 120,
-                                child:
-                                    Center(child: Text(data['plans_time_4'])))),
-                            DataCell(Container(
-                                margin: EdgeInsets.all(5),
-                                padding: EdgeInsets.all(8.0),
+                              ),
+                            ),
+                            DataCell(
+                              Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(10.0),
                                 decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 116, 200, 240),
-                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: AppColors.bluelight.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(10.0),
                                 ),
-                                height: 50.0,
-                                width: 120,
                                 child: Center(
-                                    child: Text(data['plans_subject_4'])))),
+                                  child: Text(
+                                    data['plans_time_2'],
+                                    style: TextStyle(
+                                        fontSize: 16.0, color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                  color: AppColors.bluelight.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    data['plans_subject_2'],
+                                    style: TextStyle(
+                                        fontSize: 16.0, color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                  color: AppColors.bluelight.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    data['plans_time_3'],
+                                    style: TextStyle(
+                                        fontSize: 16.0, color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                  color: AppColors.bluelight.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    data['plans_subject_3'],
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                        color: Colors.white
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                  color: AppColors.bluelight.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    data['plans_time_4'],
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                        color: Colors.white
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                  color: AppColors.bluelight.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    data['plans_subject_4'],
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                        color: Colors.white
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ]);
                         }).toList(),
                       ),

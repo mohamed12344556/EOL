@@ -32,9 +32,9 @@ class _ChoicePlanAskState extends State<ChoicePlanAsk> {
         ),
         leading: IconButton(
           icon: const Icon(
-            Icons.arrow_back,
+            Icons.arrow_back_ios_new,
             color: Colors.white,
-            size: 35,
+            size: 25,
           ),
           onPressed: () {
             Navigator.of(context).pop();

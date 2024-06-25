@@ -31,6 +31,16 @@ class _ChooseDepartmentState extends State<ChooseDepartment> {
     return Scaffold(
       backgroundColor: AppColors.bluelight,
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.white,
+            size: 25,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         backgroundColor: AppColors.bluelight,
         elevation: 0,
         centerTitle: true,
@@ -134,7 +144,7 @@ class _ChooseDepartmentState extends State<ChooseDepartment> {
             children: [
               Image.asset(
                 imagePath,
-                height: 80,
+                height: 90,
               ),
               Text(
                 text,

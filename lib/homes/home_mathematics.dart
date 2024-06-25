@@ -5,6 +5,7 @@ import 'package:high_school/account-1/account.dart';
 import 'package:high_school/componet/crud.dart';
 import 'package:high_school/constant/link.dart';
 import 'package:high_school/contact_view.dart';
+import 'package:high_school/departement/choose_department.dart';
 import 'package:high_school/login/sign/login.dart';
 import 'package:high_school/main.dart';
 import 'package:high_school/plan/plan_note_showbottom.dart';
@@ -182,7 +183,7 @@ class _HomeMathematicsState extends State<HomeMathematics> with Crud {
             title: "Subject",
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const SubjectViewMath()));
+                  builder: (context) => const ChooseDepartment()));
             },
           ),
         ),

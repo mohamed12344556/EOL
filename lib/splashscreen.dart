@@ -1,43 +1,40 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:high_school/homes/home_scientific.dart';
 import 'package:lottie/lottie.dart';
 
-import 'login/sign/login.dart';
-
-class splashscreen extends StatefulWidget {
-  const splashscreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<splashscreen> createState() => _splashscreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _splashscreenState extends State<splashscreen> {
-  var _time;
+class _SplashScreenState extends State<SplashScreen> {
+  late Timer _time;
 
-  start() {
+  void start() {
     _time = Timer(
-        Duration(
-          seconds: 6,
-        ),
-        call);
+      Duration(seconds: 4),
+      call,
+    );
   }
 
   void call() {
     Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Login(),
-        ));
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomeScientific(),
+      ),
+    );
   }
 
   @override
-  void initstate() {
-    start();
+  void initState() {
     super.initState();
+    start();
   }
 
   @override
@@ -49,18 +46,18 @@ class _splashscreenState extends State<splashscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff55598d),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.dark,
           statusBarColor: Colors.black,
           systemNavigationBarColor: Colors.black,
         ),
-        backgroundColor: Color(0xff55598d),
+        backgroundColor: Colors.white,
       ),
       body: Center(
         child: Lottie.asset(
-          'images/Animation - 1713312927949.json',
+          'assets/images/Animation.json',
         ),
       ),
     );

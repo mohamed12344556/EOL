@@ -43,7 +43,7 @@ class _LoginState extends State<Login> {
           await prefs.setString("username", response['data']['username']);
           await prefs.setString("email", response['data']['email']);
           Navigator.of(context)
-              .pushNamedAndRemoveUntil("choose_department", (route) => false);
+              .pushNamedAndRemoveUntil("splach", (route) => false);
           return response['data']['id'].toString();
         } else {
           print('Login failed: $response'); // Log the response for debugging
@@ -156,7 +156,7 @@ class _LoginState extends State<Login> {
                         ),
                         const SizedBox(height: 16),
                         Container(
-                          width: 80,
+                          width: 100,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                           ),

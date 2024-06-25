@@ -1,9 +1,11 @@
+
 import 'package:flutter/material.dart';
+import 'package:high_school/Subjects/sub-lit/subject_lit.dart';
+import 'package:high_school/Subjects/sub-math/subject_math.dart';
+import 'package:high_school/Subjects/sub-sci/subject_scie.dart';
 import 'package:high_school/Subjects/utils/app_colors.dart';
 import 'package:high_school/Subjects/utils/fonts.dart';
-import 'package:high_school/homes/home_literary.dart';
-import 'package:high_school/homes/home_mathematics.dart';
-import 'package:high_school/homes/home_scientific.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChooseDepartment extends StatefulWidget {
@@ -53,6 +55,7 @@ class _ChooseDepartmentState extends State<ChooseDepartment> {
             ),
             width: 450,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Center(
                   child: Text(
@@ -68,11 +71,11 @@ class _ChooseDepartmentState extends State<ChooseDepartment> {
                   context,
                   'assets/images/microscope.png',
                   'Scientific',
-                  () {
+                      () {
                     saveDepartment("علوم");
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => HomeScientific(),
+                        builder: (context) => SubjectViewsci(),
                       ),
                     );
                   },
@@ -82,11 +85,11 @@ class _ChooseDepartmentState extends State<ChooseDepartment> {
                   context,
                   'assets/images/tools.png',
                   'Mathematics',
-                  () {
+                      () {
                     saveDepartment("رياضة");
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => HomeMathematics(),
+                        builder: (context) => SubjectViewMath(),
                       ),
                     );
                   },
@@ -96,11 +99,11 @@ class _ChooseDepartmentState extends State<ChooseDepartment> {
                   context,
                   'assets/images/books.png',
                   'Literary',
-                  () {
+                      () {
                     saveDepartment("ادبي");
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => HomeLiterary(),
+                        builder: (context) => SubjectViewlit(),
                       ),
                     );
                   },
@@ -113,8 +116,7 @@ class _ChooseDepartmentState extends State<ChooseDepartment> {
     );
   }
 
-  Widget _buildDepartmentButton(BuildContext context, String imagePath,
-      String text, VoidCallback onPressed) {
+  Widget _buildDepartmentButton(BuildContext context, String imagePath, String text, VoidCallback onPressed) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 90.0),
       child: Container(

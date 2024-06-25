@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:high_school/Subjects/utils/fonts.dart';
 import 'package:high_school/componet/crud.dart';
 import 'package:high_school/componet/valid.dart';
 import 'package:high_school/constant/link.dart';
@@ -68,7 +69,7 @@ class _sign_inState extends State<sign_in> {
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 70,
-                              fontFamily: 'Smooch-Regular'),
+                              fontFamily: Appfonts.fontfamilymont),
                         ),
                       ),
                       Center(
@@ -77,7 +78,7 @@ class _sign_inState extends State<sign_in> {
                         style: TextStyle(
                             color: Color(0xFF102C57),
                             fontSize: 30,
-                            fontFamily: 'Ephesis-Regular'),
+                            fontFamily: Appfonts.fontfamilymont),
                       )),
                       SizedBox(
                         height: 20,

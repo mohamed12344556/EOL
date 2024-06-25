@@ -15,6 +15,7 @@ import 'package:high_school/plan/note/addnote.dart';
 import 'package:high_school/plan/note/editenote.dart';
 import 'package:high_school/plan/note/yournote.dart';
 import 'package:high_school/services/service_initializer.dart';
+import 'package:high_school/splashscreen.dart';
 import 'package:high_school/views/community/views/community_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,8 +43,8 @@ class MyApp extends StatelessWidget {
         fallbackLocale: ServiceInitializer.locale,
         translations: LanguageTranslation(),
         initialRoute:
-            sharepref.getString("id") == null ? "login" : "choose_department",
-        // "home_literary",
+            sharepref.getString("id") == null ? "login" : "splach",
+        // home: splashscreen(),
         routes: {
           "addnote": (context) => const AddNote(),
           "editenote": (context) => const EditNote(),
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
           "AskPage": (context) => const Ask_Page(),
           "community": (context) => const CommunityView(),
           "Ur_Notes": (context) => const YourNote(),
+          "splach": (context) => const SplashScreen(),
         });
   }
 }

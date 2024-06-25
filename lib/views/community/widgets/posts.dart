@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:high_school/Subjects/utils/app_assets.dart';
-import 'package:high_school/Subjects/utils/app_colors.dart';
 import 'package:high_school/core/localization/app_localization.dart';
 import 'package:high_school/models/post_model.dart';
 import 'package:high_school/models/user_model.dart';
@@ -167,7 +166,7 @@ class MyPost extends StatelessWidget {
                                     color:
                                         snapShot.data == null || !snapShot.data!
                                             ? Colors.grey[400]
-                                            : AppColors.blue,
+                                            : Colors.red,
                                     Assets.like,
                                     fit: BoxFit.fill,
                                   );

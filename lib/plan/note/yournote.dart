@@ -34,16 +34,6 @@ class _YourNoteState extends State<YourNote> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.white,
-            size: 25,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
         title: const Text(
           "Your Notes",
           style: TextStyle(
@@ -107,8 +97,8 @@ class _YourNoteState extends State<YourNote> {
                             ontap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => EditNote(
-                                        notes: notesData[i],
-                                      )));
+                                    notes: notesData[i],
+                                  )));
                             },
                             title: "${notesData[i]['notes_title']}",
                             content: "${notesData[i]['notes_content']}");
